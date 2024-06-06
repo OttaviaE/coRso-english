@@ -18,7 +18,7 @@ header-includes:
     - \usepackage{graphicx} 
     - \usepackage{setspace}
     - \usepackage{tabularx}
-    - \useinnertheme{circles}
+    # - \useinnertheme{circles}
     - \usetheme[compressed]{Singapore}
     - \usepackage[english]{babel}
     - \usepackage{tikzsymbols}

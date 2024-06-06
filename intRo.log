@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10.12) (preloaded format=pdflatex 2023.11.26)  6 JUN 2024 12:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10.12) (preloaded format=pdflatex 2023.11.26)  6 JUN 2024 12:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -979,8 +979,6 @@ Package: tabularx 2023/07/08 v2.11c `tabularx' package (DPC)
 \TX@cols=\count364
 \TX@ftn=\toks58
 )
-(C:\Users\ottae\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerinnertheme
-circles.sty)
 (C:\Users\ottae\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerthemeSinga
 pore.sty
 (C:\Users\ottae\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beameroutertheme
@@ -1341,33 +1339,33 @@ Package: xurl 2022/01/09 v 0.10 modify URL breaks
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 178.
+(hyperref)                removing `\\' on input line 177.
 
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1
-83.
+82.
 (C:\Users\ottae\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (intRo.aux)
 \openout1 = `intRo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1428,53 +1426,53 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 183.
+Package hyperref Info: Link coloring OFF on input line 182.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 183.
+(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 182.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> OT1/cmss/b/n on input line 183.
+(Font)                  OT1/lmr/bx/n --> OT1/cmss/b/n on input line 182.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 183.
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 182.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/lmss/b/n on input line 183.
+(Font)                  OT1/cmss/b/n --> OT1/lmss/b/n on input line 182.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 183.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 183.
+(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 182.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 183.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 183.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 183.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 182.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 183.
+(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 183.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 183.
+(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 182.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 183.
+(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 183.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 183.
+(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 182.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 183.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 183.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 182.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 183.
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 182.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 183.
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/lmss/b/n --> T1/lmr/b/n on input line 183.
+(Font)                  OT1/lmss/b/n --> T1/lmr/b/n on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T1/lmss/b/n --> T1/lmss/b/n on input line 183.
+(Font)                  T1/lmss/b/n --> T1/lmss/b/n on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 183.
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 183.
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 182.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 183.
+(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 182.
 
 (C:\Users\ottae\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-b
 asic-dictionary-English.dict
@@ -1500,19 +1498,19 @@ Dictionary: translator-numbers-dictionary, Language: English
 heorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \microtypecontext on input line 183.
-Package microtype Info: Applying patch `item' on input line 183.
-Package microtype Info: Applying patch `toc' on input line 183.
-Package microtype Info: Applying patch `eqnum' on input line 183.
-Package microtype Info: Applying patch `footnote' on input line 183.
-Package microtype Info: Applying patch `verbatim' on input line 183.
+LaTeX Info: Redefining \microtypecontext on input line 182.
+Package microtype Info: Applying patch `item' on input line 182.
+Package microtype Info: Applying patch `toc' on input line 182.
+Package microtype Info: Applying patch `eqnum' on input line 182.
+Package microtype Info: Applying patch `footnote' on input line 182.
+Package microtype Info: Applying patch `verbatim' on input line 182.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 183.
+LaTeX Info: Redefining \showhyphens on input line 182.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1524,22 +1522,22 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
 Package hyperref Warning: Option `pdfauthor' has already been used,
-(hyperref)                setting the option has no effect on input line 183.
+(hyperref)                setting the option has no effect on input line 182.
 
 (intRo.nav)
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-83.
+82.
 (C:\Users\ottae\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (184.49155pt too wide) detected at line 183
+Overfull \hbox (184.49155pt too wide) detected at line 182
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
  []
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 184
+Overfull \hbox (184.49155pt too wide) detected at line 183
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1556,7 +1554,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 tae/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 189
+Overfull \hbox (184.49155pt too wide) detected at line 188
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1572,7 +1570,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [2
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 192
+Overfull \hbox (184.49155pt too wide) detected at line 191
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1581,7 +1579,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 192
 (intRo.toc) [3
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 194
+Overfull \hbox (184.49155pt too wide) detected at line 193
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1590,7 +1588,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 194
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 206
+Overfull \hbox (184.49155pt too wide) detected at line 205
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1656,7 +1654,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 
 {C:/Users/ottae/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 209
+Overfull \hbox (184.49155pt too wide) detected at line 208
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1665,7 +1663,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 209
 (intRo.toc) [5
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 211
+Overfull \hbox (184.49155pt too wide) detected at line 210
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1674,7 +1672,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 211
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 231
+Overfull \hbox (184.49155pt too wide) detected at line 230
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1695,7 +1693,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [6
 
 {C:/Users/ottae/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
-Overfull \hbox (184.49155pt too wide) detected at line 259
+Overfull \hbox (184.49155pt too wide) detected at line 258
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1715,7 +1713,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{r-projects-fo
 r-the-win}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.259 \end{frame}
+l.258 \end{frame}
                  
 Overfull \hbox (184.49155pt too wide) has occurred while \output is active
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
@@ -1726,19 +1724,19 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [8
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 266
+Overfull \hbox (184.49155pt too wide) detected at line 265
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
  []
 
-<img/project1.png, id=1609, 483.30562pt x 350.05782pt>
+<img/project1.png, id=1615, 483.30562pt x 350.05782pt>
 File: img/project1.png Graphic file (type png)
 <use img/project1.png>
-Package pdftex.def Info: img/project1.png  used on input line 266.
+Package pdftex.def Info: img/project1.png  used on input line 265.
 (pdftex.def)             Requested size: 335.74263pt x 243.1853pt.
 
-Overfull \vbox (50.69351pt too high) detected at line 266
+Overfull \vbox (50.69351pt too high) detected at line 265
  []
 
 
@@ -1751,21 +1749,21 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [9
 
  <./img/project1.png>]
-Overfull \hbox (184.49155pt too wide) detected at line 279
+Overfull \hbox (184.49155pt too wide) detected at line 278
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
  []
 
-<img/project2.png, id=1783, 483.30562pt x 341.77687pt>
+<img/project2.png, id=1789, 483.30562pt x 341.77687pt>
 File: img/project2.png Graphic file (type png)
 <use img/project2.png>
-Package pdftex.def Info: img/project2.png  used on input line 279.
+Package pdftex.def Info: img/project2.png  used on input line 278.
 (pdftex.def)             Requested size: 161.15501pt x 113.9601pt.
-<img/project3.png, id=1784, 483.30562pt x 356.0803pt>
+<img/project3.png, id=1790, 483.30562pt x 356.0803pt>
 File: img/project3.png Graphic file (type png)
 <use img/project3.png>
-Package pdftex.def Info: img/project3.png  used on input line 279.
+Package pdftex.def Info: img/project3.png  used on input line 278.
 (pdftex.def)             Requested size: 161.15501pt x 118.72935pt.
 
 Overfull \hbox (184.49155pt too wide) has occurred while \output is active
@@ -1777,7 +1775,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [10
 
  <./img/project2.png> <./img/project3.png>]
-Overfull \hbox (184.49155pt too wide) detected at line 282
+Overfull \hbox (184.49155pt too wide) detected at line 281
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1786,7 +1784,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 282
 (intRo.toc) [11
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 284
+Overfull \hbox (184.49155pt too wide) detected at line 283
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1795,7 +1793,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 284
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 316
+Overfull \hbox (184.49155pt too wide) detected at line 315
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1806,7 +1804,7 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <9> not available
 (Font)              Font shape `T1/lmss/m/sl' tried instead on input line 19.
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 316.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 315.
 
 Overfull \hbox (184.49155pt too wide) has occurred while \output is active
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
@@ -1817,7 +1815,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [12
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 318
+Overfull \hbox (184.49155pt too wide) detected at line 317
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1826,7 +1824,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 318
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 336
+Overfull \hbox (184.49155pt too wide) detected at line 335
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1842,7 +1840,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [13
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 338
+Overfull \hbox (184.49155pt too wide) detected at line 337
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1851,14 +1849,14 @@ Overfull \hbox (184.49155pt too wide) detected at line 338
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 348
+Overfull \hbox (184.49155pt too wide) detected at line 347
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
  []
 
 (intRo.vrb
-<img/meme.jpg, id=2651, 889.3225pt x 666.49pt>
+<img/meme.jpg, id=2657, 889.3225pt x 666.49pt>
 File: img/meme.jpg Graphic file (type jpg)
 <use img/meme.jpg>
 Package pdftex.def Info: img/meme.jpg  used on input line 3.
@@ -1873,7 +1871,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [14
 
  <./img/meme.jpg>]
-Overfull \hbox (184.49155pt too wide) detected at line 351
+Overfull \hbox (184.49155pt too wide) detected at line 350
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1882,7 +1880,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 351
 (intRo.toc) [15
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 353
+Overfull \hbox (184.49155pt too wide) detected at line 352
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1891,7 +1889,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 353
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 368
+Overfull \hbox (184.49155pt too wide) detected at line 367
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1907,7 +1905,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [16
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 371
+Overfull \hbox (184.49155pt too wide) detected at line 370
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1916,7 +1914,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 371
 (intRo.toc) [17
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 373
+Overfull \hbox (184.49155pt too wide) detected at line 372
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1925,7 +1923,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 373
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 385
+Overfull \hbox (184.49155pt too wide) detected at line 384
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1941,7 +1939,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [18
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 387
+Overfull \hbox (184.49155pt too wide) detected at line 386
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1950,7 +1948,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 387
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 403
+Overfull \hbox (184.49155pt too wide) detected at line 402
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1966,7 +1964,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [19
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 405
+Overfull \hbox (184.49155pt too wide) detected at line 404
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1975,7 +1973,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 405
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 418
+Overfull \hbox (184.49155pt too wide) detected at line 417
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -1991,7 +1989,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [20
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 420
+Overfull \hbox (184.49155pt too wide) detected at line 419
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2000,7 +1998,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 420
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 437
+Overfull \hbox (184.49155pt too wide) detected at line 436
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2016,7 +2014,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [21
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 439
+Overfull \hbox (184.49155pt too wide) detected at line 438
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2025,7 +2023,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 439
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 446
+Overfull \hbox (184.49155pt too wide) detected at line 445
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2041,7 +2039,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [22
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 448
+Overfull \hbox (184.49155pt too wide) detected at line 447
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2050,14 +2048,14 @@ Overfull \hbox (184.49155pt too wide) detected at line 448
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 476
+Overfull \hbox (184.49155pt too wide) detected at line 475
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
  []
 
 (intRo.vrb
-<img/work.png, id=4625, 385.44pt x 385.44pt>
+<img/work.png, id=4631, 385.44pt x 385.44pt>
 File: img/work.png Graphic file (type png)
 <use img/work.png>
 Package pdftex.def Info: img/work.png  used on input line 3.
@@ -2089,7 +2087,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 {C:/Users/ottae/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/
 Users/ottae/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc} <./
 img/work.png>]
-Overfull \hbox (184.49155pt too wide) detected at line 480
+Overfull \hbox (184.49155pt too wide) detected at line 479
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2098,7 +2096,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 480
 (intRo.toc) [24
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 482
+Overfull \hbox (184.49155pt too wide) detected at line 481
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2107,7 +2105,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 482
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 507
+Overfull \hbox (184.49155pt too wide) detected at line 506
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2123,7 +2121,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [25
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 509
+Overfull \hbox (184.49155pt too wide) detected at line 508
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2132,7 +2130,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 509
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 538
+Overfull \hbox (184.49155pt too wide) detected at line 537
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2148,7 +2146,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [26
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 540
+Overfull \hbox (184.49155pt too wide) detected at line 539
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2157,7 +2155,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 540
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 584
+Overfull \hbox (184.49155pt too wide) detected at line 583
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2173,7 +2171,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [27
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 586
+Overfull \hbox (184.49155pt too wide) detected at line 585
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2182,7 +2180,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 586
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 610
+Overfull \hbox (184.49155pt too wide) detected at line 609
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2198,7 +2196,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [28
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 612
+Overfull \hbox (184.49155pt too wide) detected at line 611
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2207,7 +2205,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 612
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 638
+Overfull \hbox (184.49155pt too wide) detected at line 637
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2223,7 +2221,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [29
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 640
+Overfull \hbox (184.49155pt too wide) detected at line 639
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2232,7 +2230,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 640
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 666
+Overfull \hbox (184.49155pt too wide) detected at line 665
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2248,7 +2246,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [30
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 668
+Overfull \hbox (184.49155pt too wide) detected at line 667
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2257,7 +2255,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 668
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 708
+Overfull \hbox (184.49155pt too wide) detected at line 707
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2273,7 +2271,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [31
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 710
+Overfull \hbox (184.49155pt too wide) detected at line 709
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2282,7 +2280,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 710
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 750
+Overfull \hbox (184.49155pt too wide) detected at line 749
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2298,7 +2296,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [32
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 752
+Overfull \hbox (184.49155pt too wide) detected at line 751
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2307,7 +2305,7 @@ Overfull \hbox (184.49155pt too wide) detected at line 752
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 783
+Overfull \hbox (184.49155pt too wide) detected at line 782
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2323,7 +2321,7 @@ Overfull \hbox (184.49155pt too wide) has occurred while \output is active
 [33
 
 ]
-Overfull \hbox (184.49155pt too wide) detected at line 785
+Overfull \hbox (184.49155pt too wide) detected at line 784
   [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
 [] [][][][][][][][]  
@@ -2332,262 +2330,5 @@ Overfull \hbox (184.49155pt too wide) detected at line 785
 \openout4 = `intRo.vrb'.
 
 
-Overfull \hbox (184.49155pt too wide) detected at line 799
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-(intRo.vrb)
-Overfull \hbox (184.49155pt too wide) has occurred while \output is active
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-[34
-
-]
-Overfull \hbox (184.49155pt too wide) detected at line 801
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-\openout4 = `intRo.vrb'.
-
-
-Overfull \hbox (184.49155pt too wide) detected at line 838
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-(intRo.vrb)
-Overfull \hbox (184.49155pt too wide) has occurred while \output is active
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-[35
-
-]
-Overfull \hbox (184.49155pt too wide) detected at line 840
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-\openout4 = `intRo.vrb'.
-
-
-Overfull \hbox (184.49155pt too wide) detected at line 865
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-(intRo.vrb
-Overfull \hbox (95.41238pt too wide) in paragraph at lines 13--13
-[]\T1/lmtt/m/n/10.95 [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 
-2.645751 2.828427[] 
- []
-
-)
-Overfull \hbox (184.49155pt too wide) has occurred while \output is active
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-[36
-
-]
-Overfull \hbox (184.49155pt too wide) detected at line 867
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-\openout4 = `intRo.vrb'.
-
-
-Overfull \hbox (184.49155pt too wide) detected at line 893
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-(intRo.vrb
-File: img/work.png Graphic file (type png)
-<use img/work.png>
-Package pdftex.def Info: img/work.png  used on input line 3.
-(pdftex.def)             Requested size: 63.79192pt x 63.78894pt.
-)
-Overfull \vbox (5.16808pt too high) detected at line 893
- []
-
-
-Overfull \hbox (184.49155pt too wide) has occurred while \output is active
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-[37
-
-]
-Overfull \hbox (184.49155pt too wide) detected at line 895
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-\openout4 = `intRo.vrb'.
-
-
-Overfull \hbox (184.49155pt too wide) detected at line 921
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-(intRo.vrb
-Overfull \hbox (8.78488pt too wide) in paragraph at lines 11--18
- [] 
- []
-
-)
-Overfull \hbox (184.49155pt too wide) has occurred while \output is active
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-[38
-
-] (intRo.vrb
-pdfTeX warning (ext4): destination with the same identifier (name{index-the-ele
-ments-in-a-vector}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2 ...pertarget{index-the-elements-in-a-vector}{}
-                                                  
-Overfull \hbox (8.78488pt too wide) in paragraph at lines 11--18
- [] 
- []
-
-)
-Overfull \hbox (184.49155pt too wide) has occurred while \output is active
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-[39
-
-]
-Overfull \hbox (184.49155pt too wide) detected at line 923
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-\openout4 = `intRo.vrb'.
-
-
-Overfull \hbox (184.49155pt too wide) detected at line 945
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-(intRo.vrb
-Overfull \hbox (8.78488pt too wide) in paragraph at lines 5--12
- [] 
- []
-
-)
-Overfull \hbox (184.49155pt too wide) has occurred while \output is active
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-[40
-
-] (intRo.vrb
-pdfTeX warning (ext4): destination with the same identifier (name{index-the-ele
-ments-in-a-vector-ii}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2 ...target{index-the-elements-in-a-vector-ii}{}
-                                                  
-Overfull \hbox (8.78488pt too wide) in paragraph at lines 5--12
- [] 
- []
-
-)
-Overfull \hbox (184.49155pt too wide) has occurred while \output is active
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-[41
-
-] (intRo.vrb
-pdfTeX warning (ext4): destination with the same identifier (name{index-the-ele
-ments-in-a-vector-ii}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2 ...target{index-the-elements-in-a-vector-ii}{}
-                                                  
-Overfull \hbox (8.78488pt too wide) in paragraph at lines 5--12
- [] 
- []
-
-)
-Overfull \hbox (184.49155pt too wide) has occurred while \output is active
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-[42
-
-] (intRo.vrb
-pdfTeX warning (ext4): destination with the same identifier (name{index-the-ele
-ments-in-a-vector-ii}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2 ...target{index-the-elements-in-a-vector-ii}{}
-                                                  
-Overfull \hbox (8.78488pt too wide) in paragraph at lines 5--12
- [] 
- []
-
-)
-Overfull \hbox (184.49155pt too wide) has occurred while \output is active
-  [] [][][] [][][][][][] [][][][][] [][][] [][][][][][][][] [][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][] [][][][][]
-[] [][][][][][][][]  
- []
-
-[43
-
-] (intRo.vrb
-pdfTeX warning (ext4): destination with the same identifier (name{index-the-ele
-ments-in-a-vector-ii}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2 ...target{index-the-elements-in-a-vector-ii}{}
-                                                  
-Overfull \hbox (8.78488pt too wide) in paragraph at lines 5--12
- [] 
- []
-
-)
-Overfull \hbox (184.49155pt too wide) has occurred while \output is active
-  [] [][][] [][][][][][] [][]
+Overfull \hbox (184.49155pt too wide) detected at line 798
+  [] [][][] [][][][][][]

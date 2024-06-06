@@ -1,44 +1,13 @@
-\frametitle{Working with data frames}
-\protect\hypertarget{working-with-data-frames}{}
-Index elements in a data frame:
+\frametitle{Don't mix them up \small unless you truly want to}
+\protect\hypertarget{dont-mix-them-up-unless-you-truly-want-to}{}
+\texttt{int} + \texttt{num} \(\rightarrow\) \texttt{num}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{babies}\SpecialCharTok{$}\NormalTok{months }\CommentTok{\# column months of babies}
-\end{Highlighting}
-\end{Shaded}
+\texttt{int}/\texttt{num} + \texttt{logi} \(\rightarrow\)
+\texttt{int}/\texttt{num}
 
-\begin{verbatim}
-[1]  5  6  8 10 12 16
-\end{verbatim}
+\texttt{int}/\texttt{num} + \texttt{factor} \(\rightarrow\)
+\texttt{int}/\texttt{num}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{babies}\SpecialCharTok{$}\NormalTok{months[}\DecValTok{2}\NormalTok{] }\CommentTok{\# second element of column months}
-\end{Highlighting}
-\end{Shaded}
+\texttt{int}/\texttt{num} + \texttt{chr} \(\rightarrow\) \texttt{chr}
 
-\begin{verbatim}
-[1] 6
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{babies[, }\StringTok{"id"}\NormalTok{] }\CommentTok{\# column id}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-[1] "sbj1" "sbj2" "sbj3" "sbj4" "sbj5" "sbj6"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{babies[}\DecValTok{2}\NormalTok{, ] }\CommentTok{\# second row of babies (obs on baby 2)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-    id months weight
-2 sbj2      6    4.5
-\end{verbatim}
+\texttt{chr} + \texttt{logi} \(\rightarrow\) \texttt{chr}
