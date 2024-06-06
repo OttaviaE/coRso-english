@@ -1,0 +1,1996 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{EastLansing}
+\usecolortheme{dove}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{255,255,255}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.75,0.01,0.01}{\textbf{\colorbox[rgb]{0.97,0.90,0.90}{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.79,0.38,0.79}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.00,0.34,0.68}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.69,0.50,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.39,0.29,0.61}{\textbf{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.57,0.30,0.62}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.54,0.53,0.53}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.00,0.58,1.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.67,0.33,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.12,0.11,0.11}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.00,0.34,0.68}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.69,0.50,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.38,0.47,0.50}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.75,0.01,0.01}{\underline{#1}}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.58,1.00}{\textbf{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.69,0.50,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.39,0.29,0.61}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{1.00,0.33,0.00}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.69,0.50,0.00}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.12,0.11,0.11}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.12,0.11,0.11}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.12,0.11,0.11}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.43,0.16}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.00,0.43,0.16}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.34,0.68}{\colorbox[rgb]{0.88,0.91,0.97}{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.24,0.68,0.91}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{1.00,0.33,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.75,0.01,0.01}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.34,0.68}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.75,0.01,0.01}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.75,0.01,0.01}{#1}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{soul}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\AtBeginDocument{\title[co\texttt{R}so]{00-Int\texttt{R}oduction}}
+\AtBeginDocument{\author[OME, UniPD]{Ottavia M. Epifania, Ph.D}}
+\AtBeginDocument{\date[13 Giugno]{13 Giugno 2024}}
+\AtBeginDocument{\institute[Lezioni UniCatt]{Lezione di Dottorato @Università Cattolica del Sacro Cuore (MI)}}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{tabularx}
+\useinnertheme{circles}
+\usetheme[compressed]{Singapore}
+\usepackage[english]{babel}
+\usepackage{tikzsymbols}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{spot}
+\usepackage{tabularx}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{booktabs}
+\newcommand\Factor{1.2}
+\setbeamerfont{subtitle}{size=\large, series=\bfseries}
+\definecolor{template}{RGB}{155, 0, 20}
+\definecolor{background}{RGB}{250, 250, 250}
+\setbeamercolor{frametitle}{bg=background}
+\setbeamertemplate{frametitle}{\color{template}\bfseries\insertframetitle\par\vskip-6pt\hrulefill}
+\AtBeginSection{\frame{\sectionpage}}
+\setbeamercolor{section name}{fg=white}
+\setbeamercolor{title}{fg=template, bg=background}
+\setbeamercolor{section title}{fg=template}
+\setbeamercolor{frame subtitle}{fg=template}
+\setbeamercolor{title}{fg=template}
+\setbeamercolor{background canvas}{bg=background}
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+\AtBeginSection[] { \begin{frame}[plain] \frametitle{Table of Contents} \tableofcontents[currentsection] \end{frame} }
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={00-IntRoduction},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{00-Int\texttt{R}oduction}
+\author{Ottavia M. Epifania\\
+Università di Padova}
+\date{June, 13 2024}
+\institute{Lezione di Dottorato @Università Cattolica del Sacro Cuore
+(MI)}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Table of contents}
+\protect\hypertarget{table-of-contents}{}
+\tableofcontents
+\end{frame}
+
+\hypertarget{who-are-you}{%
+\section{Who aRe you?}\label{who-are-you}}
+
+\begin{frame}[fragile]{}
+\protect\hypertarget{section}{}
+\begin{itemize}
+\item
+  \texttt{R} is an open source software for statistical computing,
+  graphics, and so much more
+\item
+  \texttt{RStudio} is the perfect IDE for \texttt{R} \(\rightarrow\)
+  allows for a better, easier use of \texttt{R}
+\item
+  \texttt{R} runs on Windows, MacOs, Unix
+\end{itemize}
+\end{frame}
+
+\hypertarget{working-directories}{%
+\section{Working directories}\label{working-directories}}
+
+\begin{frame}[fragile]{}
+\protect\hypertarget{section-1}{}
+If you choose not to use the \texttt{R} projects (\small what a bad,
+bad, bad idea \normalsize), you need to know your directories:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{getwd}\NormalTok{() }\CommentTok{\# the working directory in which you are right now}
+
+\FunctionTok{dir}\NormalTok{() }\CommentTok{\# list of what\textquotesingle{}s inside the current working directory }
+\end{Highlighting}
+\end{Shaded}
+
+Change your working directory:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"C:/Users/huawei/OneDrive/Documenti/GitHub/RcouRse"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{R projects for the win}
+\protect\hypertarget{r-projects-for-the-win}{}
+Dealing with working directiores is a pain in the neck you should try to
+avoid at all costs
+
+Besides, after months under review, the manuscript has finally come back
+and now you have to revise it. But where are the data\ldots? and the
+scripts with the analyses\ldots?
+
+\pause
+
+\begin{center}
+R projects for the win!
+\end{center}
+
+An R project automatically create an ``Island'' with its sub islands
+
+They are pretty convenient for at least two reasons:
+
+\begin{enumerate}
+\item
+  Allow for havin multiple R instances open at the same time
+  \(\rightarrow\) You can work on multiple projects at the same time
+\item
+  All the files you need are there
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Create an R project}
+\protect\hypertarget{create-an-r-project}{}
+File \(\rightarrow\) New project:
+
+\begin{center}\includegraphics[width=1\linewidth]{img/project1} \end{center}
+\end{frame}
+
+\begin{frame}{}
+\protect\hypertarget{section-2}{}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{center}\includegraphics[width=1\linewidth]{img/project2} \end{center}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{center}\includegraphics[width=1\linewidth]{img/project3} \end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\hypertarget{basics}{%
+\section{Basics}\label{basics}}
+
+\begin{frame}[fragile]{Calculato\texttt{R}}
+\protect\hypertarget{calculator}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{3} \SpecialCharTok{+} \DecValTok{2}   \CommentTok{\# plus}
+\DecValTok{3} \SpecialCharTok{{-}} \DecValTok{2}   \CommentTok{\# minus}
+\DecValTok{3} \SpecialCharTok{*} \DecValTok{2}   \CommentTok{\# times}
+\DecValTok{3} \SpecialCharTok{/} \DecValTok{2}   \CommentTok{\# divide}
+\FunctionTok{sqrt}\NormalTok{(}\DecValTok{4}\NormalTok{) }\CommentTok{\# square root}
+\FunctionTok{log}\NormalTok{(}\DecValTok{3}\NormalTok{)  }\CommentTok{\# natural logarithm}
+\FunctionTok{exp}\NormalTok{(}\DecValTok{3}\NormalTok{)  }\CommentTok{\# exponential}
+\end{Highlighting}
+\end{Shaded}
+
+\footnotesize
+
+Parentheses and friends
+
+\begin{quote}
+\texttt{()} \texttt{{[}{]}} \texttt{\{\}} \texttt{""} \texttt{:}
+\texttt{;} \texttt{,}
+\end{quote}
+
+Use brackets as you would do in a normal equation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\DecValTok{3} \SpecialCharTok{*} \DecValTok{2}\NormalTok{)}\SpecialCharTok{/} \FunctionTok{sqrt}\NormalTok{(}\DecValTok{25} \SpecialCharTok{+} \DecValTok{4}\NormalTok{) }\CommentTok{\# Look at me!}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{R} ignores everything after \# (it's a comment)
+\end{frame}
+
+\begin{frame}[fragile]{Assign}
+\protect\hypertarget{assign}{}
+The results of the operations can be ``stored'' into objects with
+specific names defined by the users.
+
+To assign a value to an object, there are two operators:
+
+\begin{enumerate}
+\item
+  \texttt{x\ =\ exp(2\^{}2)}
+\item
+  \texttt{X\ \textless{}-\ log(2\^{}2)}
+\end{enumerate}
+
+The elements on the right are assigned to the object on the left
+
+\textcolor{red}{Careful!} \texttt{R} is case sensitive: \texttt{x} and
+\texttt{X} are two different objects!!!
+\end{frame}
+
+\begin{frame}[fragile]{Variable names}
+\protect\hypertarget{variable-names}{}
+\begin{center}\includegraphics[width=0.45\linewidth]{img/meme} \end{center}
+
+Valid variable names are letters, numbers, dots, underscores (e.g.,
+\texttt{variable\_name})
+
+Variable names cannot start with numbers
+
+Again, \texttt{R} is case sensitive
+\end{frame}
+
+\hypertarget{get-help}{%
+\section{Get help}\label{get-help}}
+
+\begin{frame}[fragile]{}
+\protect\hypertarget{section-3}{}
+\texttt{R} community is the best feature of \texttt{R}
+
+Just copy \& paste any error message or warning in Google or ask Google
+``how to \textbf{{[}something{]}} in r''
+
+Ask \texttt{R} to help you! Type \texttt{?} in your console followed by
+the name of the function:
+
+\begin{verbatim}
+?mean()
+\end{verbatim}
+
+Will show you the help page of the \texttt{mean()} function
+\end{frame}
+
+\hypertarget{be-tidy}{%
+\section{Be tidy}\label{be-tidy}}
+
+\begin{frame}[fragile]{Organize your files}
+\protect\hypertarget{organize-your-files}{}
+\texttt{R} projects are the best way to organize your files (and your
+workflow)
+
+They allow you to have all your files in a folder organized in sub
+folders
+
+You don't have to worry about the wording directories because it's all
+there!
+
+By creating a new project, you can also initialize a Shiny app
+\end{frame}
+
+\begin{frame}[fragile]{Create a new \texttt{R} project}
+\protect\hypertarget{create-a-new-r-project}{}
+File \(\rightarrow\) New project and choose what is best for you (unless
+you have already initialized a directory for your project, select a new
+directory):
+
+\begin{itemize}
+\item
+  \texttt{R} project ``basic''
+\item
+  \texttt{R} package
+\item
+  \texttt{Shiny} project
+\end{itemize}
+
+and so much more
+\end{frame}
+
+\begin{frame}[fragile]{Take out the trash}
+\protect\hypertarget{take-out-the-trash}{}
+The \texttt{R} environment should be always tidy
+
+If it feels like you're losing it, just clean it up:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{() }\CommentTok{\# list objects in the envrinoment}
+\FunctionTok{rm}\NormalTok{(A) }\CommentTok{\# remove object A from the environment}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list=}\FunctionTok{ls}\NormalTok{()) }\CommentTok{\# remove everything from the environment}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Save the environment}
+\protect\hypertarget{save-the-environment}{}
+It might be useful to save all the computations you have done:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{save.image}\NormalTok{(}\StringTok{"my{-}computations.RData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then you can upload the environment back:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{load}\NormalTok{(}\StringTok{"my{-}Computations.RData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{When to save the environment}
+\protect\hypertarget{when-to-save-the-environment}{}
+The computations are slow and you need them to be always and easily
+accessible
+
+The best practice is to save the script and document it in an
+\texttt{RMarkdown} file \(\rightarrow\) Reproducibilty!
+\end{frame}
+
+\begin{frame}[fragile]{Your turn!}
+\protect\hypertarget{your-turn}{}
+\begin{center}\includegraphics[width=0.1\linewidth]{img/work} \end{center}
+
+\footnotesize
+
+\begin{itemize}
+\item
+  Create an R project for this course in your ``documents'' folder
+  (choose a nice name :)
+\item
+  Create a new R script (\texttt{shift\ +\ ctrl\ +\ n})
+\item
+  Calculator Using the script:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\sqrt{(15)} * 14 - \frac{22}{4}\) {[}48.72177{]}
+  \item
+    \(\frac{\sqrt{7-\pi}}{3\ (45-34)}\) {[}0.05952372{]}
+  \end{itemize}
+\item
+  Save the script
+\item
+  Assign the results of the first equation to a variable named
+  \texttt{my\_results}
+\end{itemize}
+\end{frame}
+
+\hypertarget{structures-in-r}{%
+\section{\texorpdfstring{Structures in
+\texttt{R}}{Structures in R}}\label{structures-in-r}}
+
+\begin{frame}[fragile]{Functions and arguments (pt.~I)}
+\protect\hypertarget{functions-and-arguments-pt.-i}{}
+Almost everything in \texttt{R} is done with functions, consisting of:
+
+\begin{itemize}
+\item
+  a name: \texttt{mean}
+\item
+  a pair of brackets: \texttt{()}
+\item
+  some arguments: \texttt{na.rm\ =\ TRUE}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\AttributeTok{trim =} \DecValTok{0}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3
+\end{verbatim}
+
+Arguments may be set to default values; what they are is documented in
+\texttt{?mean()}
+\end{frame}
+
+\begin{frame}[fragile]{Functions and arguments (pt.~II)}
+\protect\hypertarget{functions-and-arguments-pt.-ii}{}
+Arguments can be passed
+
+\begin{itemize}
+\item
+  without name (in the defined order)
+\item
+  with name (in arbitrary order) \(\rightarrow\) \emph{keyword matching}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(x, }\AttributeTok{trim =} \FloatTok{0.3}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+No arguments? No problems, just brackets:
+
+\begin{verbatim}
+ls(), dir(), getwd()
+\end{verbatim}
+
+Want to see the code of a function? Just type its name in the console
+without brackets:
+
+\begin{verbatim}
+chisq.test
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{concatenate}}
+\protect\hypertarget{concatenate}{}
+\begin{center}
+
+\texttt{c()}
+
+\end{center}
+
+Concatenates several objects together to combine them into a unique
+object \(\rightarrow\)
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{) }\CommentTok{\# create a vector as a concatenation of "1", "2", "3"}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1 2 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X }\OtherTok{=} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3} \CommentTok{\# create the same identical vector}
+\NormalTok{X}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1 2 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\SpecialCharTok{==}\NormalTok{ X}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] TRUE TRUE TRUE
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Vectors}
+\protect\hypertarget{vectors}{}
+Vectors are created by \textbf{c}ombining together different objects
+
+Vectors are created by using the \texttt{c()} function.
+
+All elements inside the \texttt{c()} function \textbf{must} be separated
+by a comma
+
+Different types of objects \(\rightarrow\) types of vectors:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{int}: numeric integers
+\item
+  \texttt{num}: numbers
+\item
+  \texttt{logi}: logical
+\item
+  \texttt{chr}: characters
+\item
+  \texttt{factor}: factor with different levels
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{int} and \texttt{num}}
+\protect\hypertarget{int-and-num}{}
+\texttt{int}: refers to integer: -3, -2, -1, 0, 1, 2, 3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{months }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{16}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  5  6  8 10 12 16
+\end{verbatim}
+
+\texttt{num}: refers to all numbers from \(-\infty\) to \(\infty\):
+1.0840991, 0.8431089, 0.494389, -0.7730161, 2.9038161, 0.9088839
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{11}\NormalTok{, }\AttributeTok{by =} \FloatTok{1.5}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  3.0  4.5  6.0  7.5  9.0 10.5
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{logi}}
+\protect\hypertarget{logi}{}
+Logical values can be \texttt{TRUE} (\texttt{T}) or \texttt{FALSE}
+(\texttt{F})
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v\_logi }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  TRUE  TRUE FALSE FALSE  TRUE
+\end{verbatim}
+
+logical vectors are often obtained from a comparison:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{months }\SpecialCharTok{\textgreater{}} \DecValTok{12}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] FALSE FALSE FALSE FALSE FALSE  TRUE
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{chr} and \texttt{factor}}
+\protect\hypertarget{chr-and-factor}{}
+\texttt{chr}: characters: a, b, c, D, E, F
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v\_chr }\OtherTok{=} \FunctionTok{c}\NormalTok{(letters[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{], LETTERS[}\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "a" "b" "c" "D" "E" "F"
+\end{verbatim}
+
+\texttt{factor}: use numbers or characters to identify the variable
+levels
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ses }\OtherTok{=} \FunctionTok{factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"low"}\NormalTok{, }\StringTok{"medium"}\NormalTok{, }\StringTok{"high"}\NormalTok{), }\AttributeTok{each =} \DecValTok{2}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] low    low    medium medium high   high  
+Levels: high low medium
+\end{verbatim}
+
+Change order of the levels:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ses1 }\OtherTok{=} \FunctionTok{factor}\NormalTok{(ses, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"medium"}\NormalTok{, }\StringTok{"high"}\NormalTok{, }\StringTok{"low"}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] low    low    medium medium high   high  
+Levels: medium high low
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Create vectors}
+\protect\hypertarget{create-vectors}{}
+\small
+
+Concatenate elements with \texttt{c()}:
+\texttt{vec\ =\ c(1,\ 2,\ 3,\ 4,\ 5)}
+
+Sequences:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{{-}}\DecValTok{5}\SpecialCharTok{:}\DecValTok{5} \CommentTok{\# vector of 11 numbers from {-}5 to 5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] -5 -4 -3 -2 -1  0  1  2  3  4  5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{2.5}\NormalTok{, }\FloatTok{2.5}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.5}\NormalTok{) }\CommentTok{\# sequence in steps of 0.5 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5
+\end{verbatim}
+
+Repeating elements:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] 1 2 3 1 2 3 1 2 3 1 2 3
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Create vectors II}
+\protect\hypertarget{create-vectors-ii}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"condA"}\NormalTok{, }\StringTok{"condB"}\NormalTok{), }\AttributeTok{each =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "condA" "condA" "condA" "condB" "condB" "condB"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"on"}\NormalTok{, }\StringTok{"off"}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "on"  "on"  "on"  "off" "off"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{paste0}\NormalTok{(}\StringTok{"item"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "item1" "item2" "item3" "item4"
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Don't mix them up \small unless you truly want
+to}
+\protect\hypertarget{dont-mix-them-up-unless-you-truly-want-to}{}
+\texttt{int} + \texttt{num} \(\rightarrow\) \texttt{num}
+
+\texttt{int}/\texttt{num} + \texttt{logi} \(\rightarrow\)
+\texttt{int}/\texttt{num}
+
+\texttt{int}/\texttt{num} + \texttt{factor} \(\rightarrow\)
+\texttt{int}/\texttt{num}
+
+\texttt{int}/\texttt{num} + \texttt{chr} \(\rightarrow\) \texttt{chr}
+
+\texttt{chr} + \texttt{logi} \(\rightarrow\) \texttt{chr}
+\end{frame}
+
+\begin{frame}[fragile]{Vectors and operations}
+\protect\hypertarget{vectors-and-operations}{}
+Vectors can be summed/subtracted/divided and multiplied with one another
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{8}\NormalTok{)}
+\NormalTok{a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1 2 3 4 5 6 7 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{b }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\SpecialCharTok{:}\DecValTok{1}\NormalTok{)}
+\NormalTok{b }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 4 3 2 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\SpecialCharTok{{-}}\NormalTok{ b}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] -3 -1  1  3  1  3  5  7
+\end{verbatim}
+
+If the vectors do not have the same length, you get a warning
+\end{frame}
+
+\begin{frame}[fragile]{Vectors and operations PT. II}
+\protect\hypertarget{vectors-and-operations-pt.-ii}{}
+The function is applied to each value of the vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427
+\end{verbatim}
+
+The same operation can be applied to each element of the vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(a }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(a))}\SpecialCharTok{\^{}}\DecValTok{2} \CommentTok{\# squared deviation}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 12.25  6.25  2.25  0.25  0.25  2.25  6.25 12.25
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Your turn!}
+\protect\hypertarget{your-turn-1}{}
+\begin{center}\includegraphics[width=0.19\linewidth]{img/work} \end{center}
+
+\begin{itemize}
+\item
+  Create a new script \& save it in your R project!
+\item
+  Assign the following values to a variable named \texttt{my\_var} (you
+  have to \emph{concantate} the values)
+\end{itemize}
+
+\begin{quote}
+23, 24, 25, 27, 28, 29, 30
+\end{quote}
+
+\begin{itemize}
+\item
+  Compute the mean using the function \texttt{mean()}
+\item
+  Compute the mean of vector using the functions \texttt{sum()} and
+  \texttt{length()}
+\item
+  Find the minimum (\texttt{min()}) and maximum (\texttt{max()}) value
+  of the vector
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Index the elements in a vector}
+\protect\hypertarget{index-the-elements-in-a-vector}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{names }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"Pasquale"}\NormalTok{, }\StringTok{"Egidio"}\NormalTok{, }\StringTok{"Giulia"}\NormalTok{, }\StringTok{"Livio"}\NormalTok{, }\StringTok{"Andrea"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{tabular}{p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}}
+\hline
+\multicolumn{1}{|c|}{Pasquale} & \multicolumn{1}{|c|}{Egidio}& \multicolumn{1}{|c|}{Giulia} & \multicolumn{1}{|c|}{Livio} & \multicolumn{1}{|c|}{Andrea} \\\hline
+& & & & \\
+
+\multicolumn{1}{c}{1} & \multicolumn{1}{c}{2}& \multicolumn{1}{c}{3} & \multicolumn{1}{c}{4} & \multicolumn{1}{c}{5}\\
+\end{tabular}
+\end{table}
+
+\pause
+
+\vspace{5mm}
+
+\centering
+
+\texttt{vector\_name{[}index{]}}
+\end{frame}
+
+\begin{frame}[fragile]{Index the elements in a vector II}
+\protect\hypertarget{index-the-elements-in-a-vector-ii}{}
+\begin{table}
+\centering
+\begin{tabular}{p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}}
+\hline
+\multicolumn{1}{|c|}{Pasquale} & \multicolumn{1}{|c|}{Egidio}& \multicolumn{1}{|c|}{Giulia} & \multicolumn{1}{|c|}{Livio} & \multicolumn{1}{|c|}{Andrea} \\\hline
+& & & & \\
+
+\multicolumn{1}{c}{1} & \multicolumn{1}{c}{2}& \multicolumn{1}{c}{3} & \multicolumn{1}{c}{4} & \multicolumn{1}{c}{5}\\
+\end{tabular}
+\end{table}
+
+\centering
+\pause
+
+\texttt{names{[}1{]}} \(\rightarrow\) \pause Pasquale
+
+\texttt{names{[}3{]}} \(\rightarrow\) \pause Giulia
+
+\texttt{names{[}seq(2,\ 5,\ by\ =\ 2){]}} \(\rightarrow\) \pause Egidio,
+Livio
+\end{frame}
+
+\begin{frame}[fragile]{Index the elements in a vector: Examples}
+\protect\hypertarget{index-the-elements-in-a-vector-examples}{}
+\centering
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  3.0  4.5  6.0  7.5  9.0 10.5
+\end{verbatim}
+
+\footnotesize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight[}\DecValTok{2}\NormalTok{]        }\CommentTok{\# second element of weight}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 4.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(weight[}\DecValTok{6}\NormalTok{] }\OtherTok{=} \FloatTok{15.2}\NormalTok{) }\CommentTok{\# replace the sixth element of weight}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 15.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight[}\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{, }\AttributeTok{by =} \DecValTok{2}\NormalTok{)] }\CommentTok{\# elements 1, 3, 5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3 6 9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{6}\NormalTok{]      }\CommentTok{\# elements from 2 to 6 (included)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  4.5  6.0  7.5  9.0 15.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight[}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{]      }\CommentTok{\# remove the second element}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  3.0  6.0  7.5  9.0 15.2
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Index with logic}
+\protect\hypertarget{index-with-logic}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  3.0  4.5  6.0  7.5  9.0 15.2
+\end{verbatim}
+
+\pause
+
+Which are the values \(> 7\)?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight }\SpecialCharTok{\textgreater{}} \DecValTok{7}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] FALSE FALSE FALSE  TRUE  TRUE  TRUE
+\end{verbatim}
+
+\pause
+
+``Filter'' the vector with logic
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight[weight }\SpecialCharTok{\textgreater{}} \DecValTok{7}\NormalTok{] }\CommentTok{\# only weights \textgreater{} 7}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  7.5  9.0 15.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight[weight }\SpecialCharTok{\textgreater{}=} \FloatTok{4.5} \SpecialCharTok{\&}\NormalTok{ weight }\SpecialCharTok{\textless{}} \DecValTok{8}\NormalTok{] }\CommentTok{\# values between 4.5 and 8}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 4.5 6.0 7.5
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Your turn!}
+\protect\hypertarget{your-turn-2}{}
+\begin{center}\includegraphics[width=0.1\linewidth]{img/work} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Considering \texttt{my\_var}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Third element
+  \item
+    Extract all the odd elements and assign them to a new variable
+    \texttt{my\_vector1}
+  \item
+    Extract all elements \(> 25\) from \texttt{my\_vector1}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Matrices and arrays}
+\protect\hypertarget{matrices-and-arrays}{}
+\texttt{matrix(data,\ nrow,\ ncol,\ byrow\ =\ TRUE)}
+
+\pause
+
+Create a \(3 \times 4\) matrix:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{, }\AttributeTok{nrow=}\DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{4}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Label and transpose:
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rownames}\NormalTok{(A) }\OtherTok{=} \FunctionTok{paste}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(A), }\AttributeTok{sep =} \StringTok{"\_"}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(A) }\OtherTok{=} \FunctionTok{paste}\NormalTok{(}\StringTok{"b"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(A), }\AttributeTok{sep =} \StringTok{"\_"}\NormalTok{)}
+\NormalTok{A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    b_1 b_2 b_3 b_4
+a_1   1   2   3   4
+a_2   5   6   7   8
+a_3   9  10  11  12
+\end{verbatim}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t}\NormalTok{(A)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    a_1 a_2 a_3
+b_1   1   5   9
+b_2   2   6  10
+b_3   3   7  11
+b_4   4   8  12
+\end{verbatim}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Matrices and arrays}
+\protect\hypertarget{matrices-and-arrays-1}{}
+Matrix can be created by concatenating columns or rows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cbind}\NormalTok{(}\AttributeTok{a1 =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\AttributeTok{a2 =} \DecValTok{5}\SpecialCharTok{:}\DecValTok{8}\NormalTok{, }\AttributeTok{a3 =} \DecValTok{9}\SpecialCharTok{:}\DecValTok{12}\NormalTok{) }\CommentTok{\# column bind}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     a1 a2 a3
+[1,]  1  5  9
+[2,]  2  6 10
+[3,]  3  7 11
+[4,]  4  8 12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rbind}\NormalTok{(}\AttributeTok{a1 =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\AttributeTok{a2 =} \FloatTok{5.8}\NormalTok{, }\AttributeTok{a3 =} \DecValTok{9}\SpecialCharTok{:}\DecValTok{12}\NormalTok{) }\CommentTok{\# row bind}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   [,1] [,2] [,3] [,4]
+a1  1.0  2.0  3.0  4.0
+a2  5.8  5.8  5.8  5.8
+a3  9.0 10.0 11.0 12.0
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Matrices and arrays}
+\protect\hypertarget{matrices-and-arrays-2}{}
+\small
+
+\begin{verbatim}
+array(data, c(nrow, ncol, ntab))
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_array }\OtherTok{=} \FunctionTok{array}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{30}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{)) }\CommentTok{\# 2 x 5 x 3 array}
+\end{Highlighting}
+\end{Shaded}
+
+\footnotesize
+
+\begin{verbatim}
+, , 1
+
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    3    5    7    9
+[2,]    2    4    6    8   10
+
+, , 2
+
+     [,1] [,2] [,3] [,4] [,5]
+[1,]   11   13   15   17   19
+[2,]   12   14   16   18   20
+
+, , 3
+
+....
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Index elements in matrices}
+\protect\hypertarget{index-elements-in-matrices}{}
+\begin{longtable}[]{@{}lccc@{}}
+\toprule\noalign{}
+& {[},1{]} & {[},2{]} & {[},3{]} \\
+\midrule\noalign{}
+\endhead
+{[}1,{]} & \(1, 1\) & \(1, 2\) & \(1, 3\) \\
+{[}2,{]} & \(2, 1\) & \(2, 2\) & \(2, 3\) \\
+{[}3,{]} & \(3, 1\) & \(3, 2\) & \(3, 3\) \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\centering
+
+\texttt{matrix\_name{[}row,\ column{]}}
+\end{frame}
+
+\begin{frame}[fragile]{Index elements in matrices I}
+\protect\hypertarget{index-elements-in-matrices-i}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A[}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{] }\CommentTok{\# cell in row 2 column 3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A[}\DecValTok{2}\NormalTok{, ] }\CommentTok{\# second row}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+b_1 b_2 b_3 b_4 
+  5   6   7   8 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A[, }\DecValTok{3}\NormalTok{] }\CommentTok{\# third column}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+a_1 a_2 a_3 
+  3   7  11 
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Index elements in arrays}
+\protect\hypertarget{index-elements-in-arrays}{}
+\texttt{array\_name{[}row,\ col,\ tab{]}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_array[}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{] }\CommentTok{\# cell in 2nd row 1st col of 3rd tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_array[, , }\DecValTok{3}\NormalTok{] }\CommentTok{\# 3rd tab}
+
+\NormalTok{my\_array[}\DecValTok{1}\NormalTok{, ,}\DecValTok{2}\NormalTok{] }\CommentTok{\# 1st row in tab 2}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Your turn!}
+\protect\hypertarget{your-turn-3}{}
+\begin{center}\includegraphics[width=0.19\linewidth]{img/work} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Create a \(3 \times 3\) matrix with the 3-times table up to 24
+\item
+  Assign the matrix to the variable \texttt{my\_mat}
+\item
+  Name the row names as ``row'' and the column names as ``column''
+\item
+  Traspose \texttt{my\_mat} and assign it to the variable \texttt{my\_t}
+\item
+  Index from \texttt{my\_t}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The first row
+  \item
+    The second column
+  \item
+    The cell \([3, 3]\)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Lists}
+\protect\hypertarget{lists}{}
+Can store different objects (e.g., vectors, data frames, other lists):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_list }\OtherTok{=} \FunctionTok{list}\NormalTok{(}\AttributeTok{w =}\NormalTok{ weight, }\AttributeTok{m =}\NormalTok{ months, }\AttributeTok{s =}\NormalTok{ ses1, }\AttributeTok{a =}\NormalTok{ A)}
+\end{Highlighting}
+\end{Shaded}
+
+The components of the list can be indexed with \texttt{\$} or
+\texttt{{[}{[}{]}{]}} and the name (or position) of the component:
+
+Index \texttt{months}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_list[[}\StringTok{"m"}\NormalTok{]] }\CommentTok{\# my\_list$m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  5  6  8 10 12 16
+\end{verbatim}
+
+Index \texttt{weight}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_list[[}\DecValTok{1}\NormalTok{]] }\CommentTok{\# my\_list$weight or my\_list[["w"]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  3.0  4.5  6.0  7.5  9.0 15.2
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Your turn!}
+\protect\hypertarget{your-turn-4}{}
+\begin{center}\includegraphics[width=0.15\linewidth]{img/work} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Create a a list with the following elements
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{my\_mat}
+  \item
+    \texttt{my\_mat1}
+  \item
+    The elements \(> 25\) of \texttt{my\_var}
+  \item
+    Assign the list to the variable \texttt{my\_list}
+  \end{itemize}
+\item
+  Date un nome ad ogni elemento all'interno della lista
+\end{itemize}
+\end{frame}
+
+\hypertarget{the-king-of-data-structure-data-frames}{%
+\section{The king of data structure: data
+frames}\label{the-king-of-data-structure-data-frames}}
+
+\begin{frame}[fragile]{}
+\protect\hypertarget{section-4}{}
+Data frames are lists that consist of vectors and factors of equal
+length. The rows in a data frame refer to one unit:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{id }\OtherTok{=} \FunctionTok{paste0}\NormalTok{(}\StringTok{"sbj"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{)}
+\NormalTok{babies }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(id, months, weight)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{babies}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    id months weight
+1 sbj1      5    3.0
+2 sbj2      6    4.5
+3 sbj3      8    6.0
+4 sbj4     10    7.5
+5 sbj5     12    9.0
+6 sbj6     16   15.2
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Working with data frames}
+\protect\hypertarget{working-with-data-frames}{}
+Index elements in a data frame:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{babies}\SpecialCharTok{$}\NormalTok{months }\CommentTok{\# column months of babies}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  5  6  8 10 12 16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{babies}\SpecialCharTok{$}\NormalTok{months[}\DecValTok{2}\NormalTok{] }\CommentTok{\# second element of column months}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{babies[, }\StringTok{"id"}\NormalTok{] }\CommentTok{\# column id}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "sbj1" "sbj2" "sbj3" "sbj4" "sbj5" "sbj6"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{babies[}\DecValTok{2}\NormalTok{, ] }\CommentTok{\# second row of babies (obs on baby 2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    id months weight
+2 sbj2      6    4.5
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Working with data frames I}
+\protect\hypertarget{working-with-data-frames-i}{}
+Logic applies:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{babies[babies}\SpecialCharTok{$}\NormalTok{weight }\SpecialCharTok{\textgreater{}} \DecValTok{7}\NormalTok{, ] }\CommentTok{\# all obs above 7 kg}
+\NormalTok{babies[babies}\SpecialCharTok{$}\NormalTok{id }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"sbj1"}\NormalTok{, }\StringTok{"sbj6"}\NormalTok{), ] }\CommentTok{\# obs of sbj1 }
+                                           \CommentTok{\# and sbj7}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Working with data frames II}
+\protect\hypertarget{working-with-data-frames-ii}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(babies) }\CommentTok{\# show the dimensions of the data frame}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 6 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(babies) }\CommentTok{\# variable names (= colnames(babies))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "id"     "months" "weight"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{View}\NormalTok{(babies) }\CommentTok{\# open data viewer}
+
+\FunctionTok{plot}\NormalTok{(babies) }\CommentTok{\# pariwise plot}
+\end{Highlighting}
+\end{Shaded}
+
+\vfill
+
+\footnotesize You can use these commands also on other \texttt{R}
+objects
+\end{frame}
+
+\begin{frame}[fragile]{Working with data frames III}
+\protect\hypertarget{working-with-data-frames-iii}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(babies) }\CommentTok{\# show details on babies}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   6 obs. of  3 variables:
+ $ id    : chr  "sbj1" "sbj2" "sbj3" "sbj4" ...
+ $ months: num  5 6 8 10 12 16
+ $ weight: num  3 4.5 6 7.5 9 15.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(babies) }\CommentTok{\# descriptive statistics }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      id                months         weight      
+ Length:6           Min.   : 5.0   Min.   : 3.000  
+ Class :character   1st Qu.: 6.5   1st Qu.: 4.875  
+ Mode  :character   Median : 9.0   Median : 6.750  
+                    Mean   : 9.5   Mean   : 7.533  
+                    3rd Qu.:11.5   3rd Qu.: 8.625  
+                    Max.   :16.0   Max.   :15.200  
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Sorting}
+\protect\hypertarget{sorting}{}
+\small
+
+\texttt{order()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{babies[}\FunctionTok{order}\NormalTok{(babies}\SpecialCharTok{$}\NormalTok{weight), ] }\CommentTok{\# sort by increasing weight}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    id months weight
+1 sbj1      5    3.0
+2 sbj2      6    4.5
+3 sbj3      8    6.0
+4 sbj4     10    7.5
+5 sbj5     12    9.0
+6 sbj6     16   15.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{babies[}\FunctionTok{order}\NormalTok{(babies}\SpecialCharTok{$}\NormalTok{weight,    }\CommentTok{\# sort by decreasing weight}
+             \AttributeTok{decreasing =}\NormalTok{ T), ] }
+\end{Highlighting}
+\end{Shaded}
+
+Multiple arguments in \texttt{order}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{babies[}\FunctionTok{order}\NormalTok{(babies}\SpecialCharTok{$}\NormalTok{weight, babies}\SpecialCharTok{$}\NormalTok{months, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{), ]         }
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Aggregating}
+\protect\hypertarget{aggregating}{}
+Aggregate a response variable according to grouping variable(s) (e.g.,
+averaging per experimental conditions):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Single response variable, single grouping variable}
+\FunctionTok{aggregate}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x, }\AttributeTok{data =}\NormalTok{ data, FUN, ...)}
+
+\CommentTok{\# Multiple response variables, multiple grouping variables}
+\FunctionTok{aggregate}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(y1, y2) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x1 }\SpecialCharTok{+}\NormalTok{ x2, }\AttributeTok{data =}\NormalTok{ data, FUN, ...)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Aggregating: Example}
+\protect\hypertarget{aggregating-example}{}
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ToothGrowth }\CommentTok{\# Vitamin C and tooth growth (Guinea Pigs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    len supp dose
+1   4.2   VC  0.5
+2  11.5   VC  0.5
+3   7.3   VC  0.5
+....
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{aggregate}\NormalTok{(len }\SpecialCharTok{\textasciitilde{}}\NormalTok{ supp }\SpecialCharTok{+}\NormalTok{ dose, }\AttributeTok{data =}\NormalTok{ ToothGrowth, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  supp dose   len
+1   OJ  0.5 13.23
+2   VC  0.5  7.98
+3   OJ  1.0 22.70
+4   VC  1.0 16.77
+5   OJ  2.0 26.06
+6   VC  2.0 26.14
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Reshaping: Long to wide}
+\protect\hypertarget{reshaping-long-to-wide}{}
+Data can be organized in wide format (i.e., one line for each
+statistical unit) or in long format (i.e., one line for each
+observation).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Indometh }\CommentTok{\# Long format}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   Subject time conc
+1        1 0.25 1.50
+2        1 0.50 0.94
+3        1 0.75 0.78
+4        1 1.00 0.48
+5        1 1.25 0.37
+6        1 2.00 0.19
+....
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Long to wide}
+\protect\hypertarget{long-to-wide}{}
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# From long to wide}
+\NormalTok{df.w }\OtherTok{\textless{}{-}} \FunctionTok{reshape}\NormalTok{(Indometh, }\AttributeTok{v.names =} \StringTok{"conc"}\NormalTok{, }\AttributeTok{timevar =} \StringTok{"time"}\NormalTok{,}
+    \AttributeTok{idvar =} \StringTok{"Subject"}\NormalTok{, }\AttributeTok{direction =} \StringTok{"wide"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   Subject conc.0.25 conc.0.5 conc.0.75 conc.1 conc.1.25 conc.2 conc.3 conc.4
+1        1      1.50     0.94      0.78   0.48      0.37   0.19   0.12   0.11
+12       2      2.03     1.63      0.71   0.70      0.64   0.36   0.32   0.20
+23       3      2.72     1.49      1.16   0.80      0.80   0.39   0.22   0.12
+34       4      1.85     1.39      1.02   0.89      0.59   0.40   0.16   0.11
+45       5      2.05     1.04      0.81   0.39      0.30   0.23   0.13   0.11
+56       6      2.31     1.44      1.03   0.84      0.64   0.42   0.24   0.17
+   conc.5 conc.6 conc.8
+....
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Reshaping: Wide to long}
+\protect\hypertarget{reshaping-wide-to-long}{}
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# From wide to long}
+\NormalTok{df.l }\OtherTok{\textless{}{-}} \FunctionTok{reshape}\NormalTok{(df.w, }\AttributeTok{varying =} \FunctionTok{list}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\DecValTok{12}\NormalTok{), }\AttributeTok{v.names =} \StringTok{"conc"}\NormalTok{,}
+    \AttributeTok{idvar =} \StringTok{"Subject"}\NormalTok{, }\AttributeTok{direction =} \StringTok{"long"}\NormalTok{, }\AttributeTok{times =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{,}
+        \FloatTok{0.75}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{1.25}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{8}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       Subject time conc
+1.0.25       1 0.25 1.50
+2.0.25       2 0.25 2.03
+3.0.25       3 0.25 2.72
+....
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.l[}\FunctionTok{order}\NormalTok{(df.l}\SpecialCharTok{$}\NormalTok{Subject), ] }\CommentTok{\# reorder by subject}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       Subject time conc
+1.0.25       1 0.25 1.50
+1.0.5        1 0.50 0.94
+1.0.75       1 0.75 0.78
+....
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Your turn!}
+\protect\hypertarget{your-turn-5}{}
+\begin{center}\includegraphics[width=0.19\linewidth]{img/work} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Create a data frame with 10 observations and the folowing columns:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{id}: \texttt{character}, repondents IDs
+  \item
+    \texttt{ses}: \texttt{factor}, socio-economic level with three
+    levels, \texttt{low}, \texttt{medium}, \texttt{high} (3
+    \texttt{low}, 5 \texttt{medium}, 2 \texttt{high})
+  \item
+    \texttt{income}: \texttt{numeric} (e.g.,
+    \texttt{runif(10,\ min\ =\ 1110,\ max\ =\ 5430)}) possibly coeherent
+    with the variable \texttt{ses}
+  \end{itemize}
+\item
+  Filter the data set
+
+  \begin{itemize}
+  \tightlist
+  \item
+    responents with `ses == high``
+  \item
+    responents with \texttt{income} \textgreater{} 2000
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\hypertarget{data-input-and-output}{%
+\section{Data input and output}\label{data-input-and-output}}
+
+\begin{frame}[fragile]{Reading tabular txt files:}
+\protect\hypertarget{reading-tabular-txt-files}{}
+\texttt{ASCII} text files in tabular or spread sheet form (one line per
+observation, one column per variable) are read using
+\texttt{read.table()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{=} \FunctionTok{read.table}\NormalTok{(}\StringTok{"C:/RcouRse/file.txt"}\NormalTok{, }\AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{data} is a data frame where the original numerical variables are
+converted in numeric vectors and character variables are converted in
+factors (not always).
+
+Arguments:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{header}: variable names in the first line? \texttt{TRUE/FALSE}
+\item
+  \texttt{sep}: which separator between the columns (e.g., comma,
+  \texttt{\textbackslash{}t})
+\item
+  \texttt{dec}: \texttt{1.2} or \texttt{1,2}?
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Reading other files}
+\protect\hypertarget{reading-other-files}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"C:/RcouRse/file.csv"}\NormalTok{, }
+                \AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{sep =} \StringTok{";"}\NormalTok{, }
+                \AttributeTok{dec =} \StringTok{","}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+From SPSS (file \texttt{.sav}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"foreign"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(foreign)}
+\NormalTok{data }\OtherTok{=} \FunctionTok{read.spss}\NormalTok{(}\StringTok{"data.sav"}\NormalTok{, }\AttributeTok{to.data.frame =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Combine data frames}
+\protect\hypertarget{combine-data-frames}{}
+If they have the same number of columns/rows
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{all\_data }\OtherTok{=} \FunctionTok{rbind}\NormalTok{(data, data1, data2) }\CommentTok{\# same columns}
+\NormalTok{all\_data }\OtherTok{=} \FunctionTok{cbind}\NormalTok{(data, data1, data2) }\CommentTok{\# same rows}
+\end{Highlighting}
+\end{Shaded}
+
+If they have different rows/columns but they share at least one
+characteristic (e.g., \texttt{ID}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{all\_data }\OtherTok{=} \FunctionTok{merge}\NormalTok{(data1, data2, }
+                 \AttributeTok{by =} \StringTok{"ID"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If there are different IDs in the two datasets \(\rightarrow\) added in
+new rows
+
+\texttt{all\_data} contains all columns in \texttt{data1} and
+\texttt{data2}. The columns of the IDs in \texttt{data1} but not in
+\texttt{data2} (and vice versa) will be filled with \texttt{NA}s
+accordingly
+\end{frame}
+
+\begin{frame}[fragile]{Export data}
+\protect\hypertarget{export-data}{}
+Writing text (or csv) file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.table}\NormalTok{(data, }\CommentTok{\# what you want to write }
+            \AttributeTok{file =} \StringTok{"mydata.txt"}\NormalTok{, }\CommentTok{\# its name + extension}
+            \AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{, }\CommentTok{\# first row with col names?}
+            \AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{,  }\CommentTok{\# column separator }
+\NormalTok{            ....) }\CommentTok{\# other arguments}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{R} environment (again):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{save}\NormalTok{(dat, }\AttributeTok{file =} \StringTok{"exp1\_data.rda"}\NormalTok{) }\CommentTok{\# save something specific }
+\FunctionTok{save}\NormalTok{(}\AttributeTok{file =} \StringTok{"the\_earth.rda"}\NormalTok{)      }\CommentTok{\# save the environment}
+\FunctionTok{load}\NormalTok{(}\StringTok{"the\_earth.rda"}\NormalTok{)             }\CommentTok{\# load it back}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\hypertarget{basics-of-programming}{%
+\section{Basics of Programming}\label{basics-of-programming}}
+
+\begin{frame}[fragile]{}
+\protect\hypertarget{section-5}{}
+Be ready to make mistakes (a lot of mistakes)
+
+Coding is \st{hard} art
+
+Eyes on the prize, but take your time (and the necessary steps) to get
+there
+
+Remember: You're not alone \(\rightarrow\) \texttt{stackoverflow} (or
+Google in general) is your best friend
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{ifelse()}}
+\protect\hypertarget{ifelse}{}
+Conditional execution:
+
+Easy: \texttt{ifelse(test,\ if\ true,\ if\ false)}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ifelse}\NormalTok{(weight }\SpecialCharTok{\textgreater{}} \DecValTok{7}\NormalTok{, }\StringTok{"big boy"}\NormalTok{, }\StringTok{"small boy"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "small boy" "small boy" "small boy" "big boy"   "big boy"   "big boy"  
+\end{verbatim}
+
+\begin{exampleblock}{Pros}
+
+- Super easy to use
+
+- Can embed multiple \texttt{ifelse()} cycles
+\end{exampleblock}
+
+\begin{alertblock}{Cons}
+
+- It works fine until you have simple tests
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{if\ ()\ \{\}\ else\ \{\}}}
+\protect\hypertarget{if-else}{}
+If you have only one condition:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (test\_1) \{}
+\NormalTok{  command\_1}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{  command\_2}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{if\ ()\ \{\}\ else\ \{\}}}
+\protect\hypertarget{if-else-1}{}
+Multiple conditions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (test\_1) \{}
+\NormalTok{  command\_1}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (test\_2) \{}
+\NormalTok{  command\_2}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{  command\_3}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{test\_1} (and \texttt{test\_2}, if you have it) \textbf{must}
+evaluate in either \texttt{TRUE} or \texttt{FALSE}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(x)) y }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{\^{}}\DecValTok{2} \ControlFlowTok{else} \FunctionTok{stop}\NormalTok{(}\StringTok{"x is missing"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Loops}
+\protect\hypertarget{loops}{}
+\texttt{for()} and \texttt{while()}
+
+Repeat a command over and over again:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Don\textquotesingle{}t do this at home}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{)      }
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(}\DecValTok{10}\NormalTok{)   }\CommentTok{\# create an empty container }
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(x)) \{}
+\NormalTok{y[i] }\OtherTok{\textless{}{-}}\NormalTok{ x[i] }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(x)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The best solution would have been:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{=}\NormalTok{ x }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Avoiding loops}
+\protect\hypertarget{avoiding-loops}{}
+Don't loop, \texttt{apply()}!
+
+\texttt{apply()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{20}\NormalTok{),}
+            \AttributeTok{nrow =} \DecValTok{5}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{4}\NormalTok{)}
+\FunctionTok{apply}\NormalTok{(X, }\DecValTok{2}\NormalTok{, max) }\CommentTok{\# maximum for each column}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1.4203744 1.0716663 2.3329026 0.9084482
+\end{verbatim}
+
+\pause
+
+\texttt{for()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{=} \ConstantTok{NULL}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(X)) \{}
+\NormalTok{  y[i] }\OtherTok{=} \FunctionTok{max}\NormalTok{(X[, i])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\end{document}
