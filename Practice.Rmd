@@ -63,20 +63,86 @@ library(ggplot2)
 library(gridExtra)
 library(knitr)
 library(tidyverse)
-hook_output <- knitr::knit_hooks$get("output")
-knitr::knit_hooks$set(output = function(x, options) {
-if (!is.null(n <- options$out.lines)) {
+# hook_output <- knitr::knit_hooks$get("output")
+# knitr::knit_hooks$set(output = function(x, options) {
+# if (!is.null(n <- options$out.lines)) {
+# x <- xfun::split_lines(x)
+# if (length(x) > n) {
+# # truncate the output
+# x <- c(head(x, n), "....\n")
+# } 
+# x <- paste(x, collapse = "\n")
+# } 
+# hook_output(x, options)
+# })
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$myline)) {
+    x = xfun::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  } else if (!is.null(n <- options$out.lines)) {
 x <- xfun::split_lines(x)
 if (length(x) > n) {
 # truncate the output
 x <- c(head(x, n), "....\n")
-} 
+}
 x <- paste(x, collapse = "\n")
-} 
-hook_output(x, options)
+}
+  hook_output(x, options)
 })
 set.seed(9999)
 library(knitr)
+
+
+library(faux)
+
+babies = rnorm_multi(n = 10, 
+                     varnames = c("genere", "peso", "altezza"),
+                     mu = c(0, 8, 80), 
+                     sd = c(1, 4, 10), 
+                     r = c(.30, .50, .80), 
+                     empirical = F)
+babies$id = paste("baby", 1:nrow(babies), sep ="")
+babies = babies[, c("id", "genere", "peso", "altezza")]
+babies$genere = norm2likert(babies$genere, 
+                            prob = c(.50, .50), 
+                            labels = c("m", "f"))
+babies$peso = norm2gamma(babies$peso, 
+                         10, 1)
+
+
+
+
+dataTol <- rnorm_multi(n = 100, 
+                  mu = c(0, 20, 20),
+                  sd = c(1, 5, 5),
+                  r = c(0.5, 0.5, 0.8), 
+                  varnames = c("A", "B", "C"),
+                  empirical = FALSE)
+dataTol$A = (norm2likert(dataTol$A, c(.17, .17, .17, .17, .17, .17)))
+dataTol$B = norm2binom(dataTol$B, size = 1, prob = .90)
+dataTol$C = norm2gamma(dataTol$C, shape = 2, rate = 4)
+
+# prendo la correlazione dei dati Tol che ho e simulo dei dati nuovi a partire da quelli 
+
+my_data = rnorm_multi(n = 100, 
+                      mu = c(10, 1000, 5), 
+                      sd = c(4, 500, 1), 
+                      r = c(.80, .30, 0.0), 
+                      varnames = c("benessere", "stipendio", "genere"))
+my_data$benessere = norm2pois(my_data$benessere, 
+                              5)
+my_data$stipendio = norm2trunc(my_data$stipendio, 
+                               min = 300)
+my_data$genere = norm2likert(my_data$genere, prob = c(.49, .51), 
+                             labels = c("m", "f"))
+months = round(runif(15, 6,  16))
+weight = seq(3, 11, length.out = 15) 
+id = paste0("sbj", 1:15)
+babies = data.frame(id, months, weight)
 ```
 
 
@@ -85,818 +151,219 @@ library(knitr)
 
 \tableofcontents
 
-<!-- ## Course material  -->
+# Import data 
 
-<!-- ```{r out.width="40%", fig.align='center', echo=FALSE} -->
-<!-- knitr::include_graphics("img/qr-code.png") -->
-<!-- ``` -->
+## `Import csv`
 
-<!-- NB: This material is based on the lessons by Prof. Florian Wickelmaier -->
-
-<!-- \small  -->
-<!-- Let's all set:  -->
-
-<!-- ```{r} -->
-<!-- set.seed(999) -->
-<!-- ``` -->
+```{r, myline=60}
+data = read.csv("data/benessere.csv", 
+                header = TRUE, 
+                sep =",", dec = ".")
+head(data)
+```
 
 
-# Who aRe you?
+# Compute sum scores 
+
+## 
+
+Data set is in wide format
+
+- Sum across columns $\rightarrow$ sum scores of the respondents
+
+> `rowSums()` (`rowMean()` for computing the mean)
+
+- Sum across rows (righe) $\rightarrow$ sum scores of the items 
+
+> `colSums()` (`colMean()` for computing the mean)
+
+
+## Well-being
+
+
+\small
+```{r mylin = 45}
+library(readxl)
+benessere = read_xlsx("data/datiBenessere.xlsx")
+
+head(benessere,2)
+
+```
+
+\normalsize
+
+`rowSums()` : 
+
+\small
+
+```{r}
+rowSums(benessere)
+```
+
+Is it meaningful....?
+
+
+## Conditioning according to variable labels
+
+They must present a regular expression (common root):
+
+```{r myline=50}
+colnames(benessere)
+```
+
+Columns with `item` $\rightarrow$ well-being items
+
+Columns with `au` $\rightarrow$ self-esteem items 
+
+## 
+
+`grep()`e `grepl()`: functions for filtering data according to a  `reg`ular `exp`ression (`regex`)
+
+\begin{center}
+\texttt{grep("regex", vector)}
+\end{center}
+
+Same functioning, different results
+
+\footnotesize
+
+```{r myline = 80}
+(my_vector = colnames(benessere))
+```
+
+`grep()`
+
+```{r}
+grep("au", my_vector)
+```
+
+`grepl()`
+
+```{r}
+grepl("au", my_vector)
+```
+
+## Compute sum scores
+
+`rowSums()` conditioned on specific columns:
+
+\small
+```{r myline = 60}
+cat(rowSums(benessere[, grep("item", colnames(benessere))])[1:15], "...")
+```
+
+Assign to a new column (new variable)
+
+```{r}
+benessere$score_ben = rowSums(benessere[, grep("item", colnames(benessere))])
+```
+
+
+## `summary()`
+
+
+\small
+
+```{r}
+babies <- read.table("data/babies.tab")
+summary(babies$peso)
+```
+
+
+## data set
+
+
+```{r}
+summary(babies)
+```
+
+
+## `table()`
+
+
+
+```{r}
+table(babies$genere)
+```
+
+
+## Contingency tables
+
+\small
+```{r}
+
+benessere = read.csv("data/benessere.csv", header = T)
+# creo una nuova variabile dicotomica per descrivere 
+# il livello di benessere
+benessere$new_benessere = with(benessere, 
+                               ifelse(benessere > mean(benessere), 
+                                      "alto", 
+                                      "basso"))
+with(benessere, table(new_benessere, genere))
+
+```
+
+## `table()` and percentages
+\small 
+
+Single variable
+
+```{r}
+(table(babies$genere)/nrow(babies))*100
+```
+
+Multiple variables
+
+```{r}
+my_perc = with(benessere, table(new_benessere, genere))
+(my_perc = cbind(my_perc, rowSums(my_perc)))
+
+```
 
 ##
 
-- `R` is an open source software for statistical computing, graphics, and so much more
+```{r}
+# ta-dan!
+my_perc/my_perc[,3]
+```
 
-- `RStudio` is the perfect IDE for `R`  $\rightarrow$ allows for a better, easier use of `R` 
 
-- `R` runs on Windows, MacOs, Unix
+## Aggregating
+
+Aggregate a response variable according to grouping variable(s) (e.g., averaging per experimental conditions): 
+
+```{r eval = FALSE}
+# one depenent variable (y) and single grouping variable
+aggregate(y ~ x, data = data, FUN, ...)
+
+# Multiple response variables, multiple grouping variables
+aggregate(cbind(y1, y2) ~ x1 + x2, data = data, FUN, ...)
+```
+
+## Aggregating: Examples
 
 
-# Working directories
+```{r}
+benessere = read.csv("data/benessereScores.csv", header = T, sep =",")
+head(benessere)
+
+```
+
 
 ## 
 
-If you choose not to use the `R` projects (\small what a bad, bad, bad idea \normalsize), you need to know your directories: 
+\normalsize 
 
-```{r eval=FALSE}
-getwd() # the working directory in which you are right now
-
-dir() # list of what's inside the current working directory 
-```
-
-Change your working directory: 
-
-```{r eval = FALSE}
-setwd("C:/Users/huawei/OneDrive/Documenti/GitHub/RcouRse")
-```
-
-
-## R projects for the win
-
-Dealing with working directiores is a pain in the neck you should try to avoid at all costs
-
-Besides, after months under review, the manuscript has finally come back and now you have to revise it. But where are the data...? and the scripts with the analyses...?
-
-\pause
-
-\begin{center}
-R projects for the win!
-\end{center}
-
-An R project automatically create an "Island" with its sub islands 
-
-They are pretty convenient for at least two reasons: 
-
-1. Allow for havin multiple R instances open at the same time $\rightarrow$ You can work on multiple projects at the same time 
-
-2. All the files you need are there
-
-##  Create an R project
-
-File  $\rightarrow$ New project: 
-
-```{r echo = FALSE, out.width = "100%"}
-knitr::include_graphics("img/project1.png")
-```
-
-## 
-
-:::: columns
-
-::: column
-```{r echo = FALSE, out.width = "100%"}
-knitr::include_graphics("img/project2.png")
-```
-
-:::
-
-
-::: column
-```{r echo = FALSE, out.width = "100%"}
-knitr::include_graphics("img/project3.png")
-```
-
-:::
-::::
-
-# Basics
-
-## Calculato`R`
-
-```{r eval = FALSE} 
-3 + 2   # plus
-3 - 2   # minus
-3 * 2   # times
-3 / 2   # divide
-sqrt(4) # square root
-log(3)  # natural logarithm
-exp(3)  # exponential
-```
-
-\footnotesize
-
-Parentheses and friends
-
-> `()` `[]` `{}` `""` `:` `;` `,`
-
-Use brackets as you would do in a normal equation:
-
-```{r eval = FALSE}
-(3 * 2)/ sqrt(25 + 4) # Look at me!
-```
-
-`R` ignores everything after # (it's a comment)
-
-
-
-## Assign 
-
-The results of the operations can be "stored" into objects with specific names defined by the users. 
-
-To assign a value to an object, there are two operators: 
-
-1. `x = exp(2^2)`
-
-2. `X <- log(2^2)`
-
-The elements on the right are assigned to the object on the left 
-
-\textcolor{red}{Careful!} `R` is case sensitive: `x` and `X` are two different objects!!!
-
-## Variable names
-
-```{r echo = FALSE, out.width="45%"}
-knitr::include_graphics("img/meme.jpg")
-```
-
-Valid variable names are letters, numbers, dots, underscores (e.g.,
-`variable_name`)
-
-Variable names cannot start with numbers
-
-Again, `R` is case sensitive
-
-
-
-
-# Get help
-
-## 
-
- `R` community is the best feature of `R`
-
-Just copy \& paste any error message or warning in Google or ask Google "how to **[something]** in r"
-
- Ask `R` to help you! Type `?` in your console followed by the name of the function:
-
-    ?mean()
-
-Will show you the help page of the `mean()` function
-
-# Be tidy
-
-## Organize your files
-
-`R` projects are the best way to organize your files (and your workflow)
-
-They allow you to have all your files in a folder organized in sub folders 
-
-You don't have to worry about the wording directories because it's all there!
-
-By creating a new project, you can also initialize a Shiny app 
-
-## Create a new `R` project
-
-File $\rightarrow$ New project and choose what is best for you (unless you have already initialized a directory for your project, select a new directory): 
-
-- `R` project "basic"
-
-- `R` package
-
-- `Shiny` project
-
-and so much more
-
-
-## Take out the trash
-
-The `R` environment should be always tidy
-
-If it feels like you're losing it, just clean it up: 
-
-```{r eval = FALSE}
-ls() # list objects in the envrinoment
-rm(A) # remove object A from the environment
-rm(list=ls()) # remove everything from the environment
-```
-
-
-## Save the environment
-
-It might be useful to save all the computations you have done: 
-
-```{r eval = FALSE}
-save.image("my-computations.RData")
-```
- 
-Then you can upload the environment back:
-
-```{r eval=FALSE}
-load("my-Computations.RData")
-```
-
-## When to save the environment
-
-The computations are slow and you need them to be always and easily accessible 
-
-The best practice is to save the script and document it in an `RMarkdown` file $\rightarrow$ Reproducibilty!
-
-
-## Your turn! 
-
-
-```{r echo = FALSE, fig.align='center', out.width="10%"}
-knitr::include_graphics("img/work.png")
-```
-
-\footnotesize
-
-- Create an R project for this course in your "documents" folder (choose a nice name :)
-
-- Create a new R script (`shift + ctrl + n`)
-
-- Calculator Using the script: 
-    - $\sqrt{(15)} * 14 - \frac{22}{4}$ [48.72177]
-    - $\frac{\sqrt{7-\pi}}{3\ (45-34)}$ [0.05952372]
-
-- Save the script 
-
-- Assign the results of the first equation to a variable named `my_results`
-
-
-
-
-
-
-# Structures in `R`
-
-## Functions and arguments (pt. I)
-
-Almost everything in `R` is done with functions, consisting of: 
-
-- a name: `mean`
-
-- a pair of brackets: `()`
-
-- some arguments: `na.rm = TRUE`
+Compute the mean of the self esteem according to gender
 
 ```{r}
-mean(1:5, trim = 0, na.rm = TRUE)
-```
-Arguments may be set to default values; what they are is
-documented in `?mean()` 
-
-## Functions and arguments (pt. II)
-
-Arguments can be passed
-
-- without name (in the defined order) 
-
-- with name (in arbitrary order) $\rightarrow$ *keyword matching*
-
-```{r eval=FALSE}
-mean(x, trim = 0.3, na.rm = TRUE)
+aggregate(score_au ~ genere, data = benessere, mean)
 ```
 
-
-No arguments? No problems, just brackets: 
-    
-    ls(), dir(), getwd()
-    
-Want to see the code of a function? Just type its name in the console without brackets: 
-
-    chisq.test
-
-## `concatenate`
-
-
-\begin{center}
-
-\texttt{c()}
-
-\end{center}
-
-Concatenates several objects together to combine them into a unique object
-$\rightarrow$
-
-\small
+Compute the mean according of self esteem and well being according to gender
 
 ```{r}
-x = c(1, 2, 3) # create a vector as a concatenation of "1", "2", "3"
-x
-X = 1:3 # create the same identical vector
-X
-x == X
-```
-
-
-
-
-## Vectors
-
-Vectors are created by **c**ombining together different objects
-
-Vectors are created by using the `c()` function. 
-
-All elements inside the `c()` function **must** be separated by a comma
-
-Different types of objects $\rightarrow$ types of vectors: 
-
-- `int`: numeric integers 
-- `num`: numbers
-- `logi`: logical
-- `chr`: characters
-- `factor`: factor with different levels
-
-
-
-## `int` and `num`
-
-`int`: refers to integer: `r -3:3`
-
-```{r}
-months = c(5, 6, 8, 10, 12, 16)
-```
-
-```{r echo = FALSE}
-months
-```
-
-
-`num`: refers to all numbers from $-\infty$ to $\infty$: `r rnorm(6)`
-
-```{r}
-weight = seq(3, 11, by = 1.5) 
-```
-
-```{r echo = FALSE}
-weight
-```
-
-## `logi`
-
-Logical values can be `TRUE` (`T`) or `FALSE` (`F`)
-
-```{r}
-v_logi = c(TRUE, TRUE, FALSE, FALSE, TRUE)
-```
-
-```{r echo = FALSE}
-v_logi
-```
-
-logical vectors are often obtained from a comparison:
-
-```{r}
-months > 12
-```
-## `chr` and `factor`
-
-`chr`: characters: `r c(letters[1:3], LETTERS[4:6])`
-
-```{r}
-v_chr = c(letters[1:3], LETTERS[4:6])
-```
-
-```{r echo = FALSE}
-v_chr 
-```
-
-
-`factor`: use numbers or characters to identify the variable levels
-
-```{r}
-ses = factor(c(rep(c("low", "medium", "high"), each = 2)))
-```
-
-```{r echo = FALSE}
-ses
-```
-
-Change order of the levels: 
-
-```{r}
-ses1 = factor(ses, levels = c("medium", "high", "low")) 
-```
-```{r echo = FALSE}
-ses1
-```
-
-
-
-## Create vectors
-
-\small
-
-Concatenate elements with `c()`: `vec = c(1, 2, 3, 4, 5)`
-
-Sequences: 
-
-```{r}
--5:5 # vector of 11 numbers from -5 to 5
-
-seq(-2.5, 2.5, by = 0.5) # sequence in steps of 0.5 
-```
-
-Repeating elements: 
-
-```{r}
-rep(1:3, 4)
-```
-
-## Create vectors II
-
-
-```{r}
-rep(c("condA", "condB"), each = 3)
-```
-
-```{r}
-rep(c("on", "off"), c(3, 2))
-```
-```{r}
-paste0("item", 1:4)
-```
-
-
-
-## Don't mix them up \small unless you truly want to
-
-`int` + `num` $\rightarrow$ `num` 
-
-`int`/`num` + `logi` $\rightarrow$ `int`/`num` 
-
-`int`/`num` + `factor` $\rightarrow$ `int`/`num` 
-
-`int`/`num` + `chr` $\rightarrow$ `chr`
-
-`chr` + `logi` $\rightarrow$ `chr`
-
-
-## Vectors and operations
-
-Vectors can be summed/subtracted/divided and multiplied with one another
-
-
-```{r}
-a = c(1:8)
-a
-b = c(4:1)
-b 
-
-a - b
-```
-If the vectors do not have the same length, you get a warning
-
-## Vectors and operations PT. II
-
-The function is applied to each value of the vector:
-
-```{r}
-sqrt(a)
-```
-The same operation can be applied to each element of the vector: 
-
-```{r}
-(a - mean(a))^2 # squared deviation
-```
-
-
-## Your turn! 
-
-```{r echo = FALSE, fig.align='center', out.width="19%"}
-knitr::include_graphics("img/work.png")
-```
-
-
-- Create a new script & save it  in your R project!
-
-- Assign the following values to a variable named `my_var` (you have to *concantate* the values)
-
-> 23, 24, 25, 27, 28, 29, 30
-
-- Compute the mean using the function `mean()`
-
-- Compute the mean of vector using the functions `sum()` and `length()`
-
-- Find the minimum (`min()`) and maximum (`max()`) value of the vector 
-
-
-
-## Index the elements in a vector
-
-
-
-
-```{r eval=TRUE}
-names = c("Pasquale", "Egidio", "Giulia", "Livio", "Andrea")
-```
-
-
-\begin{table}
-\centering
-\begin{tabular}{p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}}
-\hline
-\multicolumn{1}{|c|}{Pasquale} & \multicolumn{1}{|c|}{Egidio}& \multicolumn{1}{|c|}{Giulia} & \multicolumn{1}{|c|}{Livio} & \multicolumn{1}{|c|}{Andrea} \\\hline
-& & & & \\
-
-\multicolumn{1}{c}{1} & \multicolumn{1}{c}{2}& \multicolumn{1}{c}{3} & \multicolumn{1}{c}{4} & \multicolumn{1}{c}{5}\\
-\end{tabular}
-\end{table}
-
-\pause 
-
-\vspace{5mm}
-
-\centering 
-
-`vector_name[index]`
-
-## Index the elements in a vector II 
-
-\begin{table}
-\centering
-\begin{tabular}{p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}}
-\hline
-\multicolumn{1}{|c|}{Pasquale} & \multicolumn{1}{|c|}{Egidio}& \multicolumn{1}{|c|}{Giulia} & \multicolumn{1}{|c|}{Livio} & \multicolumn{1}{|c|}{Andrea} \\\hline
-& & & & \\
-
-\multicolumn{1}{c}{1} & \multicolumn{1}{c}{2}& \multicolumn{1}{c}{3} & \multicolumn{1}{c}{4} & \multicolumn{1}{c}{5}\\
-\end{tabular}
-\end{table}
-
-\centering
-\pause
-
-`names[1]` $\rightarrow$ \pause `r names[1]`
-
-`names[3]` $\rightarrow$ \pause `r  names[3]`
-
-`names[seq(2, 5, by = 2)]` $\rightarrow$ \pause `r names[seq(2, 5, by = 2)]`
-
-## Index the elements in a vector: Examples 
-
-\centering
-
-```{r}
-weight
-```
-
-
-\footnotesize
-```{r eval=TRUE}
-weight[2]        # second element of weight
-(weight[6] = 15.2) # replace the sixth element of weight
-weight[seq(1, 6, by = 2)] # elements 1, 3, 5
-weight[2:6]      # elements from 2 to 6 (included)
-weight[-2]      # remove the second element
-```
-
-
-## Index with logic
-
-```{r}
-weight
-```
-
-\pause
-
-Which are the values $> 7$?
-
-```{r}
-weight > 7
-```
-
-\pause
-
-"Filter" the vector with logic
-
-```{r  eval=TRUE}
-weight[weight > 7] # only weights > 7
-weight[weight >= 4.5 & weight < 8] # values between 4.5 and 8
-```
-
-## Your turn! 
-
-
-```{r echo = FALSE, fig.align='center', out.width="10%"}
-knitr::include_graphics("img/work.png")
-```
-
-- Considering `my_var`
-  - Third element
-  - Extract all the odd elements and assign them to a new variable `my_vector1`
-  - Extract all elements $> 25$ from `my_vector1`
-
-<!-- ## Work with vectors -->
-
-<!-- Index elements in vectors: `vector_name[position]` -->
-
-<!-- ```{r eval=FALSE} -->
-<!-- weight[2]        # second element in vector weight -->
-<!-- weight[6] = 15.2 # replace sixth element of weight -->
-<!-- weight[seq(1, 6, by = 2)] # elements 1, 3, 5  -->
-<!-- weight[2:6]      # elements 2 to 6 -->
-<!-- weight[-2]      # without element 2 -->
-<!-- ``` -->
-<!-- Logic applies as well:  -->
-
-<!-- ```{r  eval=FALSE} -->
-<!-- weight[weight > 7] # values greater than 7 -->
-<!-- weight[weight >= 4.5 & weight < 8] # values between 4.5  -->
-<!--                                    # and 8 -->
-<!-- ``` -->
-
-
-
-## Matrices and arrays
-
-`matrix(data, nrow, ncol, byrow = TRUE)`
-
-\pause
-
-Create a $3 \times 4$ matrix: 
-
-```{r}
-A = matrix(1:12, nrow=3, ncol = 4, byrow = TRUE)
-```
-
-Label and transpose: 
-
-
-::: columns
-
-:::: column 
-
-\scriptsize
-```{r, tidy=TRUE}
-rownames(A) = paste("a", 
-                    1:nrow(A), sep ="_") 
-colnames(A) = paste("b", 
-                    1:ncol(A), sep ="_")
-A
-```
-
-:::: 
-
-:::: column
-\scriptsize
-```{r}
-t(A)
-```
-
-
-:::: 
-
-
-::: 
-
-
-
-## Matrices and arrays
-
-Matrix can be created by concatenating columns or rows: 
-
-```{r eval=TRUE}
-cbind(a1 = 1:4, a2 = 5:8, a3 = 9:12) # column bind
-rbind(a1 = 1:4, a2 = 5.8, a3 = 9:12) # row bind
-```
-
-##  Matrices and arrays
-
-\small 
-
-    array(data, c(nrow, ncol, ntab))
-
-
-```{r}
-my_array = array(1:30, c(2, 5, 3)) # 2 x 5 x 3 array
-```
-
-\footnotesize
-
-```{r echo=FALSE, out.lines=14}
-my_array
-```
-
-
-
-<!-- ## String processing -->
-
-
-<!-- ```{r eval=FALSE} -->
-<!-- substr(x, start, stop)        # extract substring -->
-<!-- grep(pattern, x)              # match pattern (poistion) -->
-<!-- grep(pattern, x)              # match pattern (TRUE/FALSE) -->
-<!-- gsub(pattern, replacement, x) # replace pattern -->
-<!-- ``` -->
-
-<!-- `pattern` $=$ regular expression (`?regex`): -->
-
-<!-- ```{r eval= FALSE} -->
-<!-- foo      # match pattern foo -->
-<!-- .*       # match arbitrary character zero or more times -->
-<!-- [a-z0-9] # match alphanumeric character -->
-<!-- ``` -->
-
-<!-- ## Example -->
-
-<!-- Match string that starts with `a` or `b` and replace it by its starting letter. -->
-
-
-<!-- ```{r} -->
-<!-- gsub("(^[ab]).*", "\\1", c("aaa", "bbc", "cba")) -->
-<!-- ``` -->
-
-
-## Index elements in matrices
-
-```{r echo = FALSE, results='asis'}
-
-my.mat = rbind("[1,]" = c("$1, 1$", "$1, 2$", "$1, 3$"), 
-       "[2,]" = c("$2, 1$", "$2, 2$", "$2, 3$"), 
-       "[3,]" = c("$3, 1$", "$3, 2$", "$3, 3$"))
-colnames(my.mat) = c("[,1]", "[,2]", "[,3]")
-my.mat %>% kable(align = "c")
-
-```
-
-\centering
-
- `matrix_name[row, column]`
-
-## Index elements in matrices I
-
-
-```{r eval = TRUE}
-A[2, 3] # cell in row 2 column 3
-
-A[2, ] # second row
-
-A[, 3] # third column
-```
-
-## Index elements in arrays
-
- `array_name[row, col, tab]`
-
-```{r eval = FALSE}
-my_array[2, 1, 3] # cell in 2nd row 1st col of 3rd tab
-```
-
-```{r eval = FALSE}
-my_array[, , 3] # 3rd tab
-
-my_array[1, ,2] # 1st row in tab 2
-```
-
-
-## Your turn! 
-
-
-```{r echo = FALSE, fig.align='center', out.width="19%"}
-knitr::include_graphics("img/work.png")
-```
-
-- Create a $3 \times 3$ matrix with the 3-times table up to 24 
-- Assign the matrix to the variable `my_mat`
-- Name the row names as "row" and the column names as "column"
-- Traspose `my_mat` and assign it to the variable `my_t`
-- Index from `my_t`: 
-  - The first row
-  - The second column
-  - The cell $[3, 3]$
-
-## Lists 
-
-Can store different objects (e.g., vectors, data frames, other lists): 
-
-```{r}
-my_list = list(w = weight, m = months, s = ses1, a = A)
-```
-
-The components of the list can be indexed with `$` or `[[]]` and the name (or position) of the component: 
-
-Index `months`:
-
-```{r}
-my_list[["m"]] # my_list$m
-```
-
-Index `weight`: 
-
-```{r}
-my_list[[1]] # my_list$weight or my_list[["w"]]
+aggregate(cbind(score_ben, score_au) ~ genere, data = benessere, mean)
 ```
 
 
@@ -907,565 +374,130 @@ my_list[[1]] # my_list$weight or my_list[["w"]]
 knitr::include_graphics("img/work.png")
 ```
 
-
-- Create a a list with the following elements
-  - `my_mat`
-  - `my_mat1`
-  - The elements $> 25$ of `my_var`
-  - Assign the list to the variable `my_list`
-  
-- Date un nome ad ogni elemento all'interno della lista
-
-# The king of data structure: data frames
-
-##
-
-Data frames are lists that consist of vectors and factors of equal
-length. The rows in a data frame refer to one unit: 
-
-
-```{r}
-id = paste0("sbj", 1:6)
-babies = data.frame(id, months, weight)
-```
-
-```{r echo=TRUE}
-babies
-```
-
-
-## Working with data frames
-
-Index elements in a data frame: 
-
-```{r eval = TRUE}
-babies$months # column months of babies
-
-babies$months[2] # second element of column months
-
-babies[, "id"] # column id
-
-babies[2, ] # second row of babies (obs on baby 2)
-```
-
-## Working with data frames I
-
-Logic applies: 
-
-```{r eval = FALSE}
-babies[babies$weight > 7, ] # all obs above 7 kg
-babies[babies$id %in% c("sbj1", "sbj6"), ] # obs of sbj1 
-                                           # and sbj7
-```
-
-
-
-## Working with data frames II
-
-```{r}
-dim(babies) # show the dimensions of the data frame
-
-names(babies) # variable names (= colnames(babies))
-
-```
-
-
-```{r eval=FALSE}
-View(babies) # open data viewer
-
-plot(babies) # pariwise plot
-```
-
-\vfill
-
-\footnotesize You can use these commands also on other `R` objects
-
-## Working with data frames III
-
-
-```{r}
-str(babies) # show details on babies
-```
-
-```{r}
-summary(babies) # descriptive statistics 
-```
-
-
-
-## Sorting
-
 \small
 
-`order()`: 
+- Recode `frat` and assign it to a new var into the data frame (`siblings`:
+> 0 siblings $\rightarrow$ no
+>
+> 1+ sibilings $\rightarrow$ yes
+
+- Compute the mean of `score_ben` according to `siblings`
+
+- Compute the mean of `score_ben` and `score_au` according to `sibilings`and gender (assign it to the object `mean_dep`)
+
+- Compute the standard deviation of `score_ben` and `score_au` according to `sibilings`and gender (assign it to the object `sd_dep`)
+
+- merge `mean_dep` and `sd_dep` and assign the resulting object to `descr`
+
+
+\begin{alertblock}{WARNING!}
+
+When using merge the column names must be different
+
+\end{alertblock}
+
+
+## Result
+
+\footnotesize
+
+```{r echo = FALSE, myline = 80}
+
+benessere$siblings = ifelse(benessere$frat == 0, "no", "yes")
+
+mean_dep = aggregate(cbind(score_ben, score_au) ~ siblings + genere, 
+                     data = benessere, mean)
+colnames(mean_dep)[3:4] = paste("mean", colnames(mean_dep)[3:4], sep = "_")
+sd_dep = aggregate(cbind(score_ben, score_au) ~ siblings + genere, 
+                     data = benessere, sd)
+colnames(sd_dep)[3:4] = paste("sd", colnames(sd_dep)[3:4], sep =  "_")
+
+descr = merge(mean_dep, sd_dep)
+
+```
+
+
 
 ```{r}
-babies[order(babies$weight), ] # sort by increasing weight
-```
-```{r eval = FALSE}
-babies[order(babies$weight,    # sort by decreasing weight
-             decreasing = T), ] 
+descr
 ```
 
-Multiple arguments in `order`: 
 
-```{r eval = FALSE}
-babies[order(babies$weight, babies$months, decreasing = TRUE), ]         
-```
+## Solution
 
-## Aggregating
+\footnotesize
 
-Aggregate a response variable according to grouping variable(s) (e.g., averaging per experimental conditions): 
 
 ```{r eval = FALSE}
-# Single response variable, single grouping variable
-aggregate(y ~ x, data = data, FUN, ...)
+benessere$siblings = ifelse(benessere$frat == 0, "no", "yes")
 
-# Multiple response variables, multiple grouping variables
-aggregate(cbind(y1, y2) ~ x1 + x2, data = data, FUN, ...)
+mean_dep = aggregate(cbind(score_ben, score_au) ~ siblings + genere, 
+                     data = benessere, 
+                     mean)
+colnames(mean_dep)[3:4] = paste("mean", 
+                                colnames(mean_dep)[3:4], 
+                                sep = "_")
+sd_dep = aggregate(cbind(score_ben, score_au) ~ siblings + genere, 
+                     data = benessere, 
+                   sd)
+colnames(sd_dep)[3:4] = paste("sd", colnames(sd_dep)[3:4], 
+                              sep =  "_")
+
+descr = merge(mean_dep, sd_dep)
 ```
 
-## Aggregating: Example
 
-\small
+## `tidyverse()`
 
-```{r out.lines=4}
-ToothGrowth # Vitamin C and tooth growth (Guinea Pigs)
+```{r eval = FALSE}
+install.packages("tidyverse")
+library(tidyverse)
 ```
+
+
+
+\pause 
+
+\begin{center}
+
+\texttt{%>%} (Pipe)
+
+\end{center}
+
+
+Use the combo `shift + ctrl + M`
+
+Logic:
+
+```{r eval = FALSE}
+object %>%  
+  grouping %>% 
+  function
+```
+
+## Descriptive statistica
+
 
 ```{r}
-aggregate(len ~ supp + dose, data = ToothGrowth, mean)
-```
-## Reshaping: Long to wide
-
-Data can be organized in wide format (i.e., one line for each statistical unit) or in long format (i.e., one line for each observation). 
-
-```{r out.lines = 7}
-Indometh # Long format
-```
-
-
-## Long to wide
-
-\small
-
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=60), out.lines=3}
-# From long to wide
-df.w <- reshape(Indometh, v.names="conc", 
-                timevar="time",
-                idvar="Subject", direction="wide")
-```
-
-```{r out.width="70%", out.lines=8, echo = FALSE}
-df.w
-```
-
-
-## Reshaping: Wide to long
-
-\small
-
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=60)}
-# From wide to long
-df.l <- reshape(df.w, varying=list(2:12), 
-                v.names="conc", 
-                idvar="Subject", direction="long",
-times=c(.25, .5, .75, 1, 1.25, 2, 3, 4, 5, 6, 8))
-```
-
-```{r echo=FALSE, out.lines=4}
-df.l
-```
-
-```{r out.lines=4}
-df.l[order(df.l$Subject), ] # reorder by subject
-
+benessere %>%  # object
+  group_by(siblings, genere) %>%  # groupings
+  summarise(m_benessere = mean(score_ben),  # functions
+            sd_benessere = sd(score_ben), 
+            m_au = mean(score_au), 
+            sd_au = sd(score_au))
 ```
 
 
 ## Your turn! 
 
 
-```{r echo = FALSE, fig.align='center', out.width="19%"}
+```{r echo = FALSE, fig.align='center', out.width="15%"}
 knitr::include_graphics("img/work.png")
 ```
 
-- Create a data frame with 10 observations and the folowing columns: 
-  - `id`: `character`, repondents IDs
-  - `ses`: `factor`, socio-economic level with three levels, `low`, `medium`, `high` (3 `low`, 5 `medium`, 2 `high`)
-  - `income`: `numeric` (e.g., `runif(10, min = 1110, max = 5430)`) possibly coeherent with the variable `ses`
+- Compute minimum, maximum, median of  `score_au` and `score_ben` with `tidyverse`
 
-- Filter the data set 
-  - responents with `ses == high``
-  - responents with `income` > 2000
-
-# Data input and output
-
-## Reading tabular txt files: 
-
-`ASCII` text files in tabular or spread sheet form (one line per
-observation, one column per variable) are read using
-`read.table()`
-
-```{r eval = FALSE}
-data = read.table("C:/RcouRse/file.txt", header = TRUE)
-```
-
-`data` is a data frame where the original numerical variables are converted in numeric vectors and character variables are converted in factors (not always). 
-
-Arguments: 
-
-- `header`: variable names in the first line? `TRUE/FALSE`
-- `sep`: which separator between the columns (e.g., comma, `\t`)
-- `dec`: `1.2` or `1,2`?
-
-
-## Reading other files
-
-```{r eval = F, tidy=FALSE}
-data = read.csv("C:/RcouRse/file.csv", 
-                header = TRUE, sep = ";", 
-                dec = ",")
-```
-
-From SPSS (file `.sav`):
-
-```{r eval=FALSE}
-install.packages("foreign")
-library(foreign)
-data = read.spss("data.sav", to.data.frame = TRUE)
-```
-
-
-## Combine data frames
-
-If they have the same number of columns/rows
-
-```{r eval = FALSE}
-all_data = rbind(data, data1, data2) # same columns
-all_data = cbind(data, data1, data2) # same rows
-```
-
-If they have different rows/columns but they share at least one characteristic (e.g., `ID`): 
-
-```{r eval=FALSE}
-all_data = merge(data1, data2, 
-                 by = "ID")
-```
-
-
-If there are different IDs in the two datasets $\rightarrow$ added in new rows
-
-`all_data` contains all columns in `data1` and `data2`. The columns of the IDs in `data1` but not in `data2` (and vice versa) will be filled with `NA`s accordingly
-
-## Export data
-
-Writing text (or csv) file: 
-
-```{r eval=FALSE}
-write.table(data, # what you want to write 
-            file = "mydata.txt", # its name + extension
-            header = TRUE, # first row with col names?
-            sep = "\t",  # column separator 
-            ....) # other arguments
-```
-
-`R` environment (again): 
-
-```{r eval=FALSE}
-save(dat, file = "exp1_data.rda") # save something specific 
-save(file = "the_earth.rda")      # save the environment
-load("the_earth.rda")             # load it back
-```
-
-# Basics of Programming 
-
-## 
-
-Be ready to make mistakes (a lot of mistakes)
-
-Coding is ~~hard~~ art
-
-Eyes on the prize, but take your time (and the necessary steps) to get there 
-
-Remember: You're not alone $\rightarrow$ `stackoverflow` (or Google in general) is your best friend
-
-
-## `ifelse()`
-
-Conditional execution: 
-
-Easy: `ifelse(test, if true, if false)` 
-
-```{r eval=TRUE}
-ifelse(weight > 7, "big boy", "small boy")
-```
-\begin{exampleblock}{Pros}
-
-- Super easy to use
-
-- Can embed multiple \texttt{ifelse()} cycles
-\end{exampleblock}
-
-
-\begin{alertblock}{Cons}
-
-- It works fine until you have simple tests
-\end{alertblock}
-
-## `if () {} else {}`
-
-If you have only one condition: 
-
-```{r eval = FALSE}
-if (test_1) {
-  command_1
-} else {
-  command_2
-}
-```
-
-## `if () {} else {}`
-
-Multiple conditions: 
-
-```{r eval = FALSE}
-if (test_1) {
-  command_1
-} else if (test_2) {
-  command_2
-} else {
-  command_3
-}
-```
-
-`test_1` (and `test_2`, if you have it) **must** evaluate in either `TRUE` or `FALSE`
-
-```{r eval = FALSE}
-if(!is.na(x)) y <- x^2 else stop("x is missing")
-```
-
-
-## Loops 
-
-`for()` and `while()`
-
-Repeat a command over and over again: 
-
-```{r eval = FALSE}
-# Don't do this at home
-x <- rnorm(10)      
-y <- numeric(10)   # create an empty container 
-for(i in seq_along(x)) {
-y[i] <- x[i] - mean(x)
-}
-```
-
-The best solution would have been: 
-
-```{r eval=FALSE}
-y = x - mean(x)
-```
-
-## Avoiding loops
-
-Don't loop, `apply()`! 
-
-`apply()`
-
-
-```{r eval = T, tidy=FALSE}
-X <- matrix(rnorm(20),
-            nrow = 5, ncol = 4)
-apply(X, 2, max) # maximum for each column
-```
-
-\pause
-
-`for()`
-
-```{r eval =F}
-y = NULL
-for (i in 1:ncol(X)) {
-  y[i] = max(X[, i])
-}
-```
-
-
-
-
-<!-- ## Avoiding loops  -->
-
-<!-- Group-wise calculations: `tapply()` -->
-
-<!-- `tapply()` (`t` for table) may be used to do group-wise calculations -->
-<!-- on vectors. Frequently it is employed to calculate group-wise -->
-<!-- means. -->
-
-<!-- ```{r} -->
-<!-- with(ToothGrowth,  -->
-<!--      tapply(len, list(supp, dose), mean)) -->
-<!-- ``` -->
-<!-- (You could have done it with `aggregate()`) -->
-
-
-<!-- ## Writing functions  -->
-
-<!-- Compute Cohen's *d*:  -->
-
-<!-- ```{r tidy = FALSE} -->
-<!-- dcohen = function(group1, group2) { # Arguments -->
-<!--   mean_1 = mean(group1) ; mean_2 = mean(group2) -->
-<!--   var_1 = var(group1) ; var_2 = var(group2) # body -->
-<!--   d = (mean_1 - mean_2)/sqrt(((var_1 + var_2)/2) ) -->
-<!--   return(d) # results -->
-<!-- } -->
-<!-- ``` -->
-
-<!-- Use it:  -->
-
-<!-- ```{r eval = FALSE} -->
-<!-- dcohen(data$placebo, data$drug) -->
-<!-- ``` -->
-
-<!-- ## Named arguments -->
-
-<!-- Take this function:  -->
-
-<!-- ```{r eval = F, tidy=FALSE} -->
-<!-- fun1 <- function(data, data.frame, graph, limit) { ... } -->
-
-<!-- ``` -->
-
-<!-- It can be called as:  -->
-
-
-<!-- ```{r eval =FALSE, tidy=FALSE} -->
-<!-- fun1(d, df, TRUE, 20) -->
-<!-- fun1(d, df, graph=TRUE, limit=20) -->
-<!-- fun1(data=d, limit=20, graph=TRUE, data.frame=df) -->
-<!-- ``` -->
-
-<!-- Positional matching and keyword -->
-<!-- matching (as in built-in functions) -->
-
-<!-- ## Defaults  -->
-
-<!-- Arguments can be given default values $\rightarrow$ the arguments can be omitted! -->
-
-<!-- ```{r eval=FALSE} -->
-<!-- fun1 <- function(data, data.frame, graph=TRUE, -->
-<!--                  limit=20) { ... } -->
-<!-- ``` -->
-
-
-<!-- It can be called as -->
-
-<!-- ```{r eval=F} -->
-<!-- ans <- fun1(d, df) -->
-<!-- ``` -->
-
-<!-- which is now equivalent to the three cases above, but:  -->
-
-<!-- ```{r eval=F} -->
-<!-- ans <- fun1(d, df, limit=10) -->
-<!-- ``` -->
-
-<!-- which changes one of the defaults. -->
-
-<!-- ## Methods and classes -->
-
-<!-- The return value of a function may have a specified `class` $\rightarrow$ determines how it will be treated by other functions. -->
-
-<!-- For example, many classes have tailored `print` methods. -->
-
-<!-- ```{r tidy=F, out.lines=7} -->
-<!-- methods(print) -->
-<!-- ``` -->
-
-<!-- ## Define a print method! -->
-
-<!-- ...as another function:  -->
-
-<!-- ```{r} -->
-<!-- print.cohen <- function(obj){ -->
-<!--   cat("\nMy Cohen's d\n\n") -->
-<!--   cat("Effect size: ", obj$d, "\n") -->
-<!--   invisible(obj) # return the object -->
-<!-- } -->
-<!-- ``` -->
-
-<!-- We have to change our `dcohen` function a bit:  -->
-
-<!-- ```{r eval = FALSE} -->
-<!-- dcohen = function(group1, group2) { # Arguments -->
-<!--   ... -->
-<!--   dvalue = list(d = d) -->
-<!--   class(dvalue) = "cohend" -->
-<!--   return(dvalue) # results -->
-<!-- } -->
-<!-- ``` -->
-
-<!-- ## Example  -->
-
-<!-- ```{r echo = FALSE} -->
-<!-- dcohen = function(group1, group2) { # Arguments -->
-<!--   mean_1 = mean(group1) ; mean_2 = mean(group2) -->
-<!--   var_1 = var(group1) ; var_2 = var(group2) # body -->
-<!--   d = (mean_1 - mean_2)/sqrt(((var_1 + var_2)/2) ) -->
-<!--   dvalue = list(d = d) -->
-<!--   class(dvalue) = "cohend" -->
-<!--   return(dvalue) # results -->
-<!-- } -->
-<!-- print.cohen <- function(obj){ -->
-<!--   cat("\nMy Cohen's d\n\n") -->
-<!--   cat("Effect size: ", obj$d, "\n") -->
-<!--   invisible(obj) # return the object -->
-<!-- } -->
-<!-- ``` -->
-
-
-<!-- Compute the Cohen's *d* between a test group and a control group:  -->
-
-<!-- ```{r} -->
-<!-- set.seed(082022) # results equal for everyone -->
-<!-- data <- data.frame(drug = rnorm(6, 10),  -->
-<!--                    placebo = rnorm(6, 2)) -->
-<!-- my_d = dcohen(data$drug, data$placebo) -->
-<!-- print.cohen(my_d) -->
-<!-- ``` -->
-
-
-<!-- ## Debugging  -->
-
-<!-- Use the `traceback()` function:  -->
-
-<!-- ```{r eval=FALSE} -->
-<!-- foo <- function(x) { print(1); bar(2) } -->
-<!-- bar <- function(x) { x + a.variable.which.does.not.exist } -->
-<!-- ``` -->
-
-<!-- Call `foo()` and...  -->
-
-<!-- ```{r eval = FALSE} -->
-<!-- foo() #  -->
-<!-- [1] 1 -->
-<!-- Error: object ’a.variable.which.does.not.exist’ not found -->
-<!-- ``` -->
-
-
-<!-- ## -->
-
-<!-- Use `traceback()`: -->
-
-<!-- ```{r eval=FALSE} -->
-<!-- traceback() # find out where the error occurred -->
-<!-- 2: bar(2) -->
-<!-- 1: foo() -->
-<!-- ``` -->
-
-<!-- Note: `traceback()` appears as default -->
-
+- Import the `babies` datas set and compute the descriptive stats of weight and height with`tidyverse`
 
 
 # Graphics
@@ -1480,27 +512,6 @@ For both:
 - High level functions $\rightarrow$ actually produce the plot
 - Low level functions $\rightarrow$ make it looks better =)
 
-## Export graphics file
-
-
-```{r eval = F}
-postscript()  # vector graphics
-pdf()
-
-png()          # bitmap graphics
-tiff()
-jpeg()
-bmp()
-```
-
-
-Remember to run off the graphic device once you've saved the graph:
-
-```{r eval=FALSE}
-dev.off()
-```
-
-(You can do it also manually)
 
 ## Traditional graphics I
 
@@ -1548,7 +559,7 @@ Each plot is composed of two regions:
 - The plotting regions (contains the actual plot)
 - The margins region (contain axes and labels)
 
-A scatter plot: 
+## A scatter plot: 
 
 ```{r eval = FALSE}
 x <- runif(50, 0, 2) # 50 uniform random numbers
@@ -1568,6 +579,7 @@ abline(h=.6, v=.6, lty=2) # horizont. and vertic.
                           # lines
 ```
 
+
 ## Margins region 
 
 \small
@@ -1584,6 +596,7 @@ abline(h=.6, v=.6, lty=2) # horiz. and vert. lines
 for(side in 1:4) mtext(-1:4, side=side, at=.7, line=-1:4)
 mtext(paste("Side", 1:4), side=1:4, line=-1, font=2)
 ```
+
 ## Rome wasn't built in a day  \small and neither your graph
 
 Display the interaction between the two factors of a two-factorial experiment: 
@@ -1606,109 +619,340 @@ Force `A` and `B` to be `factor`:
 dat[,1:2] = lapply(dat[,1:2], as.factor)
 ```
 
-## First: The plot
+## Modificare il layout dei plot 
+
+Vanno creati dei pannelli
+
 \small
-```{r eval = TRUE, out.width="80%"}
-plot(rt ~ as.numeric(B), dat, type="n", axes=FALSE,
-     xlim=c(.8, 3.2), ylim=c(750, 1000),
-     xlab="Difficulty", ylab="Mean reaction time (ms)")
+
+```{r eval=FALSE, myline = 60}
+par(mfrow=c(nrighe, ncolonne)) # pannelli vengono riempiti per riga
+par(mfcol=c(nrighe, ncolonne)) # pannelli vengono riempiti per colonna 
 ```
 
-This will not result in anything! Well, it will just produce the container of the plot
+## `plot()`
 
-## Populate the content
-
-Plot the data points separately for each level of factor `A`.
-
-```{r eval=FALSE}
-points(rt ~ as.numeric(B), dat[dat$A=="a1",], 
-       type="b", pch=16)
-points(rt ~ as.numeric(B), dat[dat$A=="a2",], 
-       type="b", pch=4)
-
-```
-
-Add axes and a legend.
-
-```{r eval=FALSE}
-axis(side=1, at=1:3, expression(B[1], B[2], B[3]))
-axis(side=2) 
-legend(2.5, 975, expression(A[1], A[2]), pch=c(16, 4),
-       bty="n", title="Task")
+```{r eval = FALSE}
+plot(x) # solo una variabile
+plot(x, y) # due variabile (scatter plot)
+plot(y ~ x) # due variabile, y in funzione di x
 ```
 
 
-## Final result
+## Esempi: `plot(x)`
 
-::: columns
+\scriptsize
 
-:::: column
-```{r echo=FALSE, out.width="100%"}
-plot(rt ~ as.numeric(B), dat, type="n", axes=FALSE,
-     xlim=c(.8, 3.2), ylim=c(750, 1000),
-     xlab="Difficulty", ylab="Mean reaction time (ms)", 
-     cex.lab=1.5)
-points(rt ~ as.numeric(B), dat[dat$A=="a1",], 
-       type="b", pch=16)
-points(rt ~ as.numeric(B), dat[dat$A=="a2",], 
-       type="b", pch=4)
-axis(side=1, at=1:3, expression(B[1], B[2], B[3]))
-axis(side=2) 
-legend(2.5, 975, expression(A[1], A[2]), pch=c(16, 4),
-       bty="n", title="Task")
+```{r}
+with(benessere, 
+     plot(score_au, 
+          col = ifelse(genere == 1, "blue", "pink"), 
+          pch = ifelse(genere == 1, 3, 16)))
+legend(x = 115, y = 48, 
+       c("Maschi", "Femmine"), pch = c(3, 16), 
+       col =c("blue", "pink"), cex = 2)
+```
+
+
+## Esempi: `plot(x, y)`
+
+```{r}
+with(benessere, 
+     plot(score_au, score_ben))
 
 ```
 
-::::
+## Esempi: `plot(y ~ x)`
 
-:::: column
-- Error bars may be added
-using the `arrows()`
-function.
-
-- Via `par()` many graphical
-parameters may be set
-(see `?par`), for example
-`par(mgp=c(2, .7, 0))`
-reduces the distance
-between labels and axes
-::::
-
-:::
-
-
-## Graphical parameters I
-
-```{r eval=FALSE}
-adj # justification of text
-bty # box type for legend
-cex # size of text or data symbols (multiplier)
-col # color, see colors()
-las # rotation of text in margins
-lty # line type (solid, dashed, dotted, ...)
-lwd # line width
-mpg # placement of axis ticks and tick labels
-pch # data symbol type
-tck # length of axis ticks
-type # type of plot (points, lines, both, none)
+```{r}
+with(benessere, 
+     plot(score_ben ~ score_au))
 ```
 
-## Graphical parameters II
 
 
-`par()`
+## Esempi: `plot(y ~ x)` con retta di regressione
 
-```{r eval =FALSE}
-
-mai # size of figure margins (inches)
-mar # size of figure margins (lines of text)
-mfrow # number of sub-figures on a page:
-      # par(mfrow=c(1, 2)) creates two sub-figures
-oma # size of outer margins (lines of text)
-omi # size of outer margins (inches)
-pty # aspect ratio of plot region (square, maximal)
+```{r}
+with(benessere, 
+     plot(score_ben ~ score_au))
+abline(lm(score_ben ~ score_au, data = benessere), 
+          col = "blue", lty = 3, lwd = 3)
 ```
 
+
+## Esempi: `plot(y ~ x)` con x categoriale
+
+```{r}
+benessere$genere <- factor(ifelse(benessere$genere == 1, 
+                           "maschio", "femmina"))
+plot(score_au ~ genere, data = benessere)
+
+```
+
+## Attenzione!
+
+`plot(y ~ x)` con x categoriale è uguale a `boxplot(y ~ x)`
+
+
+```{r}
+boxplot(score_au ~ genere, data = benessere)
+```
+
+
+
+
+## `hist()`: Frequenze
+
+\scriptsize
+```{r}
+hist(benessere$score_au, breaks = 20)
+```
+
+
+## `hist()`: Densità
+
+Densità
+\scriptsize
+```{r}
+hist(benessere$score_au,
+     density=50, breaks=20, 
+     prob=TRUE, col = "darkblue")
+```
+
+
+
+## Multi plot (in riga)
+
+\footnotesize
+
+```{r eval = FALSE}
+par(mfrow=c(1, 2))
+
+hist(benessere$score_au,density=50, breaks=20, prob=TRUE, 
+     main = "Score au")
+curve(dnorm(x, mean=mean(benessere$score_au), 
+            sd=sd(benessere$score_au)), 
+      col="springgreen4", lwd=2, add=TRUE, yaxt="n")
+
+[...]
+
+```
+
+
+
+```{r echo = FALSE}
+par(mfrow=c(2, 2))
+
+hist(benessere$score_au,density=50, breaks=20, prob=TRUE, 
+     main = "Score au")
+curve(dnorm(x, mean=mean(benessere$score_au), 
+            sd=sd(benessere$score_au)), 
+      col="springgreen4", lwd=2, add=TRUE, yaxt="n")
+
+hist(benessere$score_ben,density=50, breaks=20, prob=TRUE, 
+     main = "Score benessere")
+curve(dnorm(x, mean=mean(benessere$score_ben), 
+            sd=sd(benessere$score_ben)), 
+      col="royalblue", lwd=2, add=TRUE, yaxt="n")
+
+```
+
+
+
+
+
+## Multiplot (in colonna)
+
+
+```{r echo = FALSE, out.width="120%"}
+par(mfcol= c(2,2))
+hist(benessere$score_au,density=50, breaks=20, prob=TRUE, 
+     main = "Score au")
+curve(dnorm(x, mean=mean(benessere$score_au), 
+            sd=sd(benessere$score_au)), 
+      col="springgreen4", lwd=2, add=TRUE, yaxt="n")
+
+hist(benessere$score_ben,density=50, breaks=20, prob=TRUE, 
+     main = "Score benessere")
+curve(dnorm(x, mean=mean(benessere$score_ben), 
+            sd=sd(benessere$score_ben)), 
+      col="royalblue", lwd=2, add=TRUE, yaxt="n")
+
+with(benessere, 
+     plot(score_au, score_ben, frame = FALSE))
+
+
+with(benessere, 
+     plot(score_au, score_ben, frame = FALSE))
+abline(lm(score_ben ~ score_au, data = benessere), col = "blue", lwd = 2)
+
+
+```
+
+
+## Multiplot (in colonna), codice
+
+
+```{r echo = T, eval = FALSE}
+par(mfcol= c(2,2))
+hist(benessere$score_au,density=50, breaks=20, prob=TRUE, 
+     main = "Score au")
+curve(dnorm(x, mean=mean(benessere$score_au), 
+            sd=sd(benessere$score_au)), 
+      col="springgreen4", lwd=2, add=TRUE, yaxt="n")
+
+hist(benessere$score_ben,density=50, breaks=20, prob=TRUE, 
+     main = "Score benessere")
+curve(dnorm(x, mean=mean(benessere$score_ben), 
+            sd=sd(benessere$score_ben)), 
+      col="royalblue", lwd=2, add=TRUE, yaxt="n")
+
+with(benessere, 
+     plot(score_au, score_ben, frame = FALSE))
+
+
+with(benessere, 
+     plot(score_au, score_ben, frame = FALSE))
+abline(lm(score_ben ~ score_au, data = benessere), col = "blue", lwd = 2)
+
+
+```
+
+## `barplot()`: Frequenze assolute
+
+Per creare i grafici a barre quando si hanno variabili discrete o categoriali
+
+ 
+
+
+```{r}
+freq_item1 = table(benessere$item1)
+barplot(freq_item1, 
+        main = "Frequenze assolute di risposta all'item 1")
+
+```
+
+## `barplot()`: Frequenze relative
+
+Richiede uno step in più $\rightarrow$ la creazione della tabella delle frequenze
+
+```{r}
+perc_item1 = freq_item1/sum(freq_item1)
+barplot(perc_item1, ylim = c(0, 1), 
+        main = "Frequenze relative di risposta all'item 1")
+
+```
+
+
+## `barplot()` con più variabili 
+
+\scriptsize
+
+```{r}
+perc_item1_gender = table(benessere$genere, benessere$item1)
+perc_item1_gender[1,] = perc_item1_gender[1,]/table(benessere$item1)
+perc_item1_gender[2,] = perc_item1_gender[2,]/table(benessere$item1)
+
+barplot(perc_item1_gender, ylim=c(0,1), 
+        legend = rownames(perc_item1_gender))
+abline(h = .5, lty = 2, col = "red")
+```
+
+
+
+## Un altro esempio di multiplot 
+
+```{r echo = FALSE, out.width="100%"}
+item_ben = benessere[, grep("item", colnames(benessere))]
+
+par(mfrow = c(2, round(ncol(item_ben)/2  + 0.2)))
+temp = NULL
+for (i in 1:ncol(item_ben)) {
+  temp = table(benessere$genere, item_ben[,i])
+  for (j in 1:nrow(temp)) {
+    temp[j,] = temp[j,]/table(item_ben[,i])
+  }
+barplot(temp, ylim=c(0,1), legend = rownames(temp), 
+        main = colnames(item_ben)[i])
+abline(h = .5, lty = 2, col = "red")
+}
+
+```
+
+
+## Un esempio di multiplot (codice) 
+\footnotesize
+
+```{r echo = TRUE, eval = FALSE, myline = 80}
+item_ben = benessere[, grep("item", colnames(benessere))]
+
+par(mfrow = c(2, round(ncol(item_ben)/2  + 0.2)))
+temp = NULL
+for (i in 1:ncol(item_ben)) {
+  temp = table(benessere$genere, item_ben[,i])
+  for (j in 1:nrow(temp)) {
+    temp[j,] = temp[j,]/table(item_ben[,i])
+  }
+barplot(temp, ylim=c(0,1), legend = rownames(temp), 
+        main = colnames(item_ben)[i])
+abline(h = .5, lty = 2, col = "red")
+}
+
+```
+
+
+
+## `interaction.plot()`
+
+Permette di vedere l'interazione tra due variabili a seconda di una terza variabile: 
+
+`interaction.plot(x, v. categoriale, y)`
+
+\pause
+
+La relazione tra peso e altezza cambia a seconda del genere?
+
+
+
+```{r echo = FALSE}
+babies = read.table("data/babies.tab")
+
+plot(altezza ~ peso, data = babies, 
+     col = ifelse(genere == "f", "pink", "blue"), 
+     pch = 16, main = "Peso - altezza dei bambini", 
+     cex = 3)
+```
+
+
+## 
+\footnotesize
+
+```{r tidy=FALSE, out.lines = 8}
+babies$cat_weight = with(babies, 
+                         ifelse(
+                           peso <= quantile(babies$peso)[2], 
+                           "light", 
+                           ifelse(peso > quantile(babies$peso)[2] & 
+                                    peso > quantile(babies$peso)[4], 
+       "medium", 
+       "heavy")))
+babies$cat_weight = factor(babies$cat_weight, 
+                           levels = c("light", 
+                                      "medium", 
+                                      "heavy"))
+
+
+babies
+```
+
+## 
+
+```{r}
+with(babies, 
+     interaction.plot(cat_weight, genere, altezza))
+
+```
 
 
 ## `ggplot2` 
@@ -1721,7 +965,36 @@ pty # aspect ratio of plot region (square, maximal)
 install.packages("ggplot2") ; library(ggplot2)
 ```
 
-The code for the previous plot: 
+```{r eval = FALSE}
+
+ggplot(data, 
+       ars(x = var.x, 
+           y = var.y, 
+           col = var.color, # factor or character
+           fill =  var.filling, # factor or character
+           shape =  var.shape, # actor or character 
+           size = var.size,  # numeric
+           ...)) + geom_graph.type() + ...
+
+```
+
+
+
+
+
+## Raw data
+
+```{r out.width="50%"}
+ggplot(rock, 
+       aes(y=peri,x=shape, color =shape, 
+           size = peri)) + geom_point() +
+  theme_bw() + theme(legend.position = "none")
+```
+
+
+
+
+## The code for the interaction plot
 
 ```{r eval = FALSE}
 ggplot(dat, aes(x = B, y = rt, group = A)) +  
@@ -1737,7 +1010,7 @@ ggplot(dat, aes(x = B, y = rt, group = A)) +
         legend.key = element_rect(fill = "#FAFAFA"))
 ```
 
-##
+## The result
 
 ```{r eval = TRUE, out.with="100%", echo=FALSE}
 ggplot(dat, aes(x = B, y = rt, group = A)) +  
@@ -1754,50 +1027,35 @@ ggplot(dat, aes(x = B, y = rt, group = A)) +
 ```
 
 
-## Raw data
+## Scatter plot 
 
-```{r out.width="50%"}
-ggplot(rock, 
-       aes(y=peri,x=shape, color =shape, 
-           size = peri)) + geom_point() +
-  theme_bw() + theme(legend.position = "none")
+```{r eval = FALSE, echo = TRUE}
+states = data.frame(state.x77)
+ggplot(states,  # raw data
+               aes(x = Illiteracy, y = Murder)) + geom_point(size =3, pch=3) + theme_classic() + theme(legend.position = "none")
 ```
 
 
-## Linear model 
-
-```{r, message=FALSE, warning=FALSE, out.width="50%"}
-ggplot(rock, 
-       aes(y=peri,x=shape, color =shape, 
-           size = peri)) + geom_point() +
-  theme_bw() + theme(legend.position = "none") + 
-  geom_smooth(method="lm")
-
+```{r}
+states = data.frame(state.x77)
+ggplot(states,  # raw data
+               aes(x = Illiteracy, y = Murder)) + geom_point(size =3, pch=3) + theme_classic() + theme(legend.position = "none")
 ```
 
-## Multi Panel 
 
-```{r echo = FALSE, out.width="80%"}
-states = data.frame(state.x77, state.name = state.name,
-state.region = state.region)
+## Linear model
 
-ggplot(states, 
-       aes(x = Population, y = Murder, 
-           size = Illiteracy)) + geom_point() +
-  facet_wrap(~state.region) + theme_bw() 
-```
-## Multi panel code 
-
-```{r eval=FALSE}
-states = data.frame(state.x77, state.name = state.name,
-                    state.region = state.region)
-
-ggplot(states, 
-       aes(x = Population, y = Murder, 
-           size = Illiteracy)) + geom_point() +
-  facet_wrap(~state.region) + theme_bw() 
+```{r echo = FALSE, eval =FALSE}
+ggplot(states,  # raw data
+               aes(x = Illiteracy, y = Murder)) + geom_point(size =3, pch=3) + theme_classic() + 
+  geom_smooth(method="lm", color="red", aes(fill="red")) + theme(legend.position = "none")
 ```
 
+```{r}
+ggplot(states,  # raw data
+               aes(x = Illiteracy, y = Murder)) + geom_point(size =3, pch=3) + theme_classic() + 
+  geom_smooth(method="lm", color="red", aes(fill="red")) + theme(legend.position = "none")
+```
 
 ## Different plots in the same panel
 
@@ -1806,7 +1064,7 @@ ggplot(states,
 use `grid.arrange()` function from the `gridExtra` package: 
 
 ```{r eval = FALSE}
-install.packages("grideExtra") ; library(gridExtra)
+install.packages("gridExtra") ; library(gridExtra)
 ```
 
 
@@ -1850,6 +1108,235 @@ grid.arrange(murder_raw, murder_lm,
 ```
 
 
+
+## Multi Panel 
+
+```{r echo = FALSE, out.width="80%"}
+states = data.frame(state.x77, state.name = state.name,
+state.region = state.region)
+
+ggplot(states, 
+       aes(x = Population, y = Murder, 
+           size = Illiteracy)) + geom_point() +
+  facet_wrap(~state.region) + theme_bw() 
+```
+
+## Multi panel code 
+
+```{r eval=FALSE}
+states = data.frame(state.x77, state.name = state.name,
+                    state.region = state.region)
+
+ggplot(states, 
+       aes(x = Population, y = Murder, 
+           size = Illiteracy)) + geom_point() +
+  facet_wrap(~state.region) + theme_bw() 
+```
+
+
+## `boxplot()` e `violinplot()`
+
+Data need to be in long format:
+
+```{r echo = FALSE}
+data.frame(id = rep(paste0("sbj", 1:3), each = 2), 
+           condition = rep(c("A", "B"),  length.out = 6), 
+           mean_time = rgamma(6, 10, 3))
+
+```
+
+
+## 
+
+```{r}
+small = benessere[, c("ID", "score_au", "score_ben")]
+score_long  = reshape(small, 
+        idvar = "ID", 
+        times =names(small)[-1], 
+        timevar = "score", v.names = "value",
+        varying = list(names(small)[-1]), 
+        direction = "long")
+head(score_long)
+```
+
+## boxplot vs violinplot
+
+::: columns
+
+:::: column
+
+Boxplot
+\scriptsize
+
+```{r myline = 60}
+ggplot(score_long, 
+       aes(x = score, y = value,
+           fill = score)) + 
+  geom_boxplot()
+```
+
+
+::::
+
+:::: column
+
+Violinplot
+
+\scriptsize
+
+```{r myline =60}
+ggplot(score_long, 
+       aes(x = score, y = value,
+           fill = score)) + 
+  geom_violin(trim = FALSE) 
+```
+
+
+::::
+
+:::
+
+##
+
+\footnotesize
+
+```{r}
+
+score_long = merge(score_long, benessere[, c("ID", "genere")])
+
+ggplot(score_long, 
+       aes(x = score, y = value,
+           fill = genere)) + geom_violin(trim = FALSE) 
+```
+
+## barplot and histogram
+
+`geom_hist()`: histogram (continuous variables)
+
+`geom_bar()`: bar plot 
+
+Arguments: 
+
+- `geom_bar(stat = "count")`: automatically counts the frequencies for each category, **does not need a y variable**
+
+- `geom_bar(stat = "identity")`: plots a value associated to each category **does need a y variable**
+
+
+
+
+## `geom_bar(stat = "count")`:
+
+```{r}
+ggplot(benessere, 
+       aes(x = item5)) + geom_bar(stat = "count")
+```
+
+
+## `geom_bar(stat = "identity")`
+
+
+\footnotesize
+```{r out.width="45%"}
+item_5 = data.frame(table(benessere$item5)/nrow(benessere))
+item_5
+
+
+```
+
+## Now the plot
+
+```{r}
+ggplot(item_5, 
+       aes(x = Var1, y = Freq)) + geom_bar(stat = "identity")
+
+```
+
+
+
+## All together
+
+Long format
+
+\footnotesize
+```{r out.lines = 6}
+new_item = benessere[, c(grep("ID", colnames(benessere)), 
+                        grep("item", colnames(benessere)))]
+new_item = reshape(new_item, 
+        idvar = "ID", 
+        times =names(new_item)[-1], 
+        timevar = "item", v.names = "value",
+        varying = list(names(new_item)[-1]), 
+        direction = "long")
+new_item
+
+```
+
+## Calcolo le proporzioni
+
+Di ogni opzione di risposta `value` per ogni item `item`
+
+```{r out.lines = 6}
+proporzione = new_item %>% 
+  group_by(item, value) %>% 
+  summarise(prop = n()/nrow(benessere))
+
+proporzione
+```
+
+
+
+## The plot (finally)
+
+```{r}
+ggplot(proporzione, 
+       aes(x = value, y = prop)) + 
+  geom_bar(stat = "identity") + 
+  facet_wrap(~item) 
+
+```
+
+
+
+# Esport graphs
+
+## In automnatico
+
+
+```{r eval = F}
+pdf("nome_grafico.pdf")
+png("nome_grafico.png")          
+tiff("nome_grafico.tiff")
+jpeg("nome_grafico.jpeg")
+bmp("nome_grafico.bmp")
+```
+
+Rember to turn off the graphical device
+
+```{r eval=FALSE}
+dev.off()
+```
+
+## Example
+
+```{r eval=FALSE}
+pdf("il_mio_violin.pdf")
+ggplot(score_long, 
+       aes(x = score, y = value,
+           fill = score)) + geom_violin(trim = FALSE) 
+dev.off()
+```
+
+
+
+## Manually
+
+
+```{r eval = FALSE, out.width="120%"}
+knitr::include_graphics("data/esporta.png")
+```
+
+
+
 # `R` for statistical computing
 
 ## 
@@ -1862,18 +1349,14 @@ see `library(help=stats)`
 
 ## 
 
-namesnal data: 
 
-- `binom.test()`: exact test of a simple null
-hypothesis about the probability of success in a Bernoulli experiment
 
 - `chisq.test()`: contingency table  $\chi^2$ tests 
-
-Metric response variable: 
-
 - `cor.test()`: association between paired samples
 - `t.test()`: one- and two-sample *t* tests (also for paired data)
-- `var.test()`: $F$ for testing the homogeneity of variances 
+- `lm(y ~ x1 + x2 + x3 ...)`: fit a linear model
+- `glm(y ~ x1 + x2 + x3 ...)`: fit a generalize linear model
+
 
 ## What is the *p*-value?
 
@@ -1898,24 +1381,6 @@ text(expression(paste("1 - ", alpha)), x = -0.0, y = 0.15, cex = 2)
 ```
 
 
-## Binomial test 
-
-Observations $X_i$ **must** be independent
-
-Hypotheses: 
-
-1. $H_0$: $p = p_0$ &nbsp; $H_1$: $p \neq p_0$
-2. $H_0$: $p = p_0$ &nbsp; $H_1$: $p < p_0$
-3. $H_0$: $p = p_0$ &nbsp; $H_1$: $p > p_0$
-
-Test statistic: 
-
-$$T = \displaystyle \sum_{i=1}^{n}X_i, \, \, \, T \sim \mathcal{B}(n, p_0)$$ 
-In `R`: 
-
-```{r eval = FALSE}
-binom.test(5, 10, p = 0.25)
-```
 
 ## $\chi^2$ test 
 
@@ -1957,6 +1422,14 @@ cor.test(~ speed + dist, cars,
          alternative = "two.sided")
 ```
 
+## Correlation matrix 
+
+```{r}
+cor(benessere[, grep("item", colnames(benessere))])
+```
+
+
+
 ## Two (indepdent) sample $t$ test
 
 Independent samples from normally distributions where $\sigma^2$ are unknown but homogeneous 
@@ -1973,7 +1446,7 @@ $$T = \frac{\bar{x_1} - \bar{x_2}}{\sigma_{\bar{x_1}-\bar{y_2}}}, \, \, T \sim t
 
 ```{r eval=FALSE}
 t.test(len ~ supp, data = ToothGrowth, 
-       var.equal = TRUE)
+       var.equal = FALSE)
 ```
 
 ## Two (depedent) sample $t$ test
@@ -2055,6 +1528,7 @@ step()    # Select a suitable model by adding or dropping
 ```
 
 
+
 ## Generalized linear models
 
 $$g(\mu) = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_kx_k + \varepsilon$$
@@ -2068,56 +1542,21 @@ In `R`:
 glm(y ~ x1 + x2 + ... + xk, family(link), data)
 ```
 
-## LM vs GLM
-
-::: columns
-
-:::: column
-
-\centering
-
-\color{template} GLM
-
-
-
-```{r echo = FALSE, warning=FALSE, out.width="90%"}
+## LM: data
+```{r echo = FALSE, warning=FALSE, out.width="90%",fig.align='center'}
 samples <- 500
-r <- 0.50
+r <- 0.55
 r_neg <- -0.95
 library('MASS')
 data <- data.frame(mvrnorm(n=samples, 
                            mu=c(1, 1), 
                            Sigma=matrix(c(1, r, r, 1), nrow=2), empirical=TRUE))
 colnames(data) <- c("x", "y")
-data$z <- ifelse(data$y < 1, 0, 1)
+data$x = data$x *2
+data$y = (data$y +5 )*2
+data$z <- ifelse(data$y < 11, 0, 1)
 model_bin <- glm(z ~x, data = data, family = "binomial")
 model = lm(y ~ x, data = data)
-
-ggplot(data, aes(y=z, x = fitted.values(model_bin))) + 
-  geom_point(size = 3, alpha = 0.6)  +
-  geom_smooth(method="glm", 
-              method.args=list(family="binomial"), 
-              color = "royalblue", 
-              se=TRUE, fill = "lightblue") + 
-  ylab(expression(paste("P"))) + 
-  xlab(expression(paste("Linear combination of predictors"))) + 
-  theme_minimal() +
-  theme(axis.ticks.y = element_blank(), 
-        axis.title.x = element_text(size = 26), 
-        axis.title.y = element_text(size = 26), 
-        axis.text = element_text(size = 22), 
-        panel.border = element_blank()) 
-
-```
-:::: 
-
-:::: column
-
-\centering
-\color{template} LM
-
-
-```{r echo = FALSE, warning=FALSE, out.width="90%"}
 ggplot(data, aes(y=y, x = fitted.values(model))) + 
   geom_point(size = 3, alpha = 0.6)  +
   geom_smooth(method="lm",  
@@ -2132,10 +1571,65 @@ ggplot(data, aes(y=y, x = fitted.values(model))) +
         panel.border = element_blank()) 
 ```
 
-::::
 
-:::
+## LM: Model
 
+\scriptsize
+
+```{r echo = TRUE}
+model = lm(y ~ x, data = data)
+summary(model)
+```
+
+
+## Diagnostic 
+
+```{r}
+par(mfrow = c(2,2))
+plot(model)
+```
+
+
+## GLM: Data
+
+```{r echo = FALSE}
+ggplot(data, aes(y=z, x = fitted.values(model_bin))) + 
+  geom_point(size = 3, alpha = 0.6)  +
+  geom_smooth(method="glm", 
+              method.args=list(family="binomial"), 
+              color = "royalblue", 
+              se=TRUE, fill = "lightblue") + 
+  ylab(expression(paste("P"))) + 
+  xlab(expression(paste("Linear combination of predictors"))) + 
+  theme_minimal() +
+  theme(axis.ticks.y = element_blank(), 
+        axis.title.x = element_text(size = 26), 
+        axis.title.y = element_text(size = 26), 
+        axis.text = element_text(size = 22), 
+        panel.border = element_blank()) 
+```
+
+## GLM: Model
+
+\scriptsize
+```{r}
+model_bin <- glm(z ~x, data = data, family = "binomial")
+summary(model_bin)
+
+```
+
+
+## Interpreting the parameters
+
+```{r}
+# the coefficients are on the log-odds scale 
+my_coef = coef(model_bin)
+# this function yields the probabilty values
+binomial()$linkinv(my_coef)
+
+
+
+```
 
 
 
@@ -2156,151 +1650,4 @@ quasi              logit, probit, cloglog, identity, inverse,
 ```
 
 
-# Simulations
-
-## Random numbers generation
-
-Use a random monster:
-
-\vspace{5mm}, 
- 
-```{r echo=FALSE, out.width="80%", include=FALSE, eval = FALSE}
-knitr::include_graphics("img/random.png")
-```
-
-## but its better with `R`
-
-\small
-Random numbers drawn from a statistical distribution $\rightarrow$ the distribution name (see `??Distributions` for an exhaustive list of distribution) prefixed by `r` (random)
-
-```{r eval = FALSE}
-rnorm(10, mean = 0, sd = 1) # draw 10 numbers from a 
-                            # normal distr. 
-rt(10, df = 20)             # draw 10 numbers from a 
-                            # t distr. with 20df
-```
-
-
-Sampling (with or without replacement) from a vector:
-
-```{r}
-sample(1:5, size = 10, replace = T)
-```
-
-Make the simulations replicable by *seeding* them: 
-
-```{r eval=FALSE}
-set.seed(999)
-rpois(4, 5)
-```
-
-## Bootstrap by resampling
-
-- Compute the sample statistics on multiple bootstrap samples $B$s drawn with replacement from the original data
-
-- Assess the variability of the statistics via the distribution of the bootstrap replicates (i.e., the statics computed on the bootstrap samples)
-
-**Bootstrap confidence intervals**
-
-Percentile intervals are the $1 - \alpha$ confidence intervals for the sample statistics with limits given by the quantiles of the bootstrap distribution 
-
-## In `R`
-
-\small
-
-```{r eval=TRUE}
-# example taken from Prof. Wickelmaier
-mouse <- data.frame(
-   grp = rep(c("trt", "ctl"), c(7, 9)),
-   surv = c(94, 197, 16, 38, 99, 141, 23, # trt
-            52, 104, 146, 10, 50, 31, 40, 27, 46) # ctl
-   )
-mean(mouse$surv[mouse$grp == "trt"]) #
-## Resampling
-sam1 <- numeric(1000) # 1000 bootstrap replicates
-for(i in seq_along(sam1)){
- trt <- sample(mouse$surv[mouse$grp == "trt"], 7, replace=T)
- sam1[i] <- mean(trt)
-}
-
-```
-
-##
-
-```{r echo=T}
-quantile(sam1, c(.025, .975))
-```
-
-
-```{r echo=FALSE, out.width="90%"}
-hist(sam1, breaks = 30, 
-     col="Pink", ylab = "Bootstrap distribution", 
-     xlab = "Bootstrap replicate", main = "", cex.lab =2)
-abline(v = mean(sam1), lwd=2)
-abline(v = quantile(sam1, c(.025, .975))[1], lwd=2, lty=2)
-abline(v = quantile(sam1, c(.025, .975))[2], lwd=2, lty=2)
-```
-
-
-## Parametric bootstrap
-
-For the likelihood ratio test: 
-
-- Fit a general ($M_1$) and a restricted model ($M_0$) to the original
-data $x$. Compute the original likelihood ratio s(x) between $M_1$
-and $M_0$
-
-- Simulate $B$ bootstrap samples  based on the stochastic
-part of the restricted model: These are observations for which
-$H_0$ is true
-
-- For each sample, fit $M_1$ and $M_0$ and compute the bootstrap
-replicate of the likelihood ratio between them
-
-- Assess the significance of the original likelihood ratio via the
-sampling distribution of bootstrap replicates
-
-## 
-
-```{r results='hide'}
-## Model fit to original data
-lm0 <- lm(surv ~ 1, mouse)  # H0: no difference between gr
-lm1 <- lm(surv ~ grp, mouse) # H1: group effect
-anova(lm0, lm1)             # original likelihood ratio
-```
-
-```{r echo=FALSE}
-anova(lm0, lm1)$F[2] 
-```
-
-
-```{r}
- ## Parametric bootstrap
-sim1 <- numeric(1000)
-for(i in seq_along(sim1)){
-  surv0 <- simulate(lm0)$sim_1  # simulate from null model
-  m0 <- lm(surv0 ~ 1, mouse)    # fit null model
-  m1 <- lm(surv0 ~ grp, mouse)  # fit alternative model
-  sim1[i] <- anova(m0, m1)$F[2] # bootstrap likeli. ratio
-  }
-```
-
-
-## 
-
-The bootstrap $p-value$ is the proportion of
-bootstrap replicates that exceed the original likelihood ratio: 
-
-```{r echo=TRUE}
-mean(sim1 >
-anova(lm0, lm1)$F[2])
-```
-
-
-```{r echo=FALSE}
-hist(sim1, breaks =30, col="pink", xlim = c(0,10), 
-     xlab="Density of sampling distribution", 
-     ylab="Bootstrap likelihood test", cex.lab=2, main="")
-
-```
 

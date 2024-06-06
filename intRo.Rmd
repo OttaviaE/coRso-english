@@ -918,7 +918,7 @@ knitr::include_graphics("img/work.png")
   
 - Date un nome ad ogni elemento all'interno della lista
 
-# The king of data structure: data frames
+# Data frames
 
 ##
 
@@ -1038,6 +1038,7 @@ ToothGrowth # Vitamin C and tooth growth (Guinea Pigs)
 ```{r}
 aggregate(len ~ supp + dose, data = ToothGrowth, mean)
 ```
+
 ## Reshaping: Long to wide
 
 Data can be organized in wide format (i.e., one line for each statistical unit) or in long format (i.e., one line for each observation). 
