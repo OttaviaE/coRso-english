@@ -1,6 +1,6 @@
 # couRse
 
-This in an introductory course of R for the graduate students of the Doctorate program in Psychology at the Università Cattolica del Sacro Cuore (Milan, Italy). The lessons will be in Room XXX in Largo Gemelli 1
+This in an introductory course of R for the graduate students of the Doctorate program in Psychology at the Università Cattolica del Sacro Cuore (Milan, Italy). 
 
 The course will be held on June 13th, 2024 nd it will consist of two sessions: 
 
